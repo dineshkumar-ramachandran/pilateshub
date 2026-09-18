@@ -1,0 +1,36 @@
+# next.js
+/.next/
+/out/
+/build/
+tsconfig.tsbuildinfo
+next-env.d.ts
+
+# deps
+/node_modules/
+/.pnp
+.pnp.js
+.yarn/install-state.gz
+
+# testing
+/coverage
+
+# misc
+.DS_Store
+*.pem
+.vscode/
+.idea/
+
+# env
+.env*.local
+.env
+
+# vercel
+.vercel
+
+# agent-generated
+AGENTS.md
+CLAUDE.md
+.agents/
+
+# source videos already copied into /public/trainees
+/videos/

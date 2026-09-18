@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" fill="#f4ecda" aria-hidden="true">
+  <!-- Front Plank: straight body from head to heels, arms supporting -->
+  <circle cx="66" cy="30" r="4"/>
+  <!-- Body — long straight line from head to feet -->
+  <path d="M10 44l55-11c2 0 3 1 3 3s-1 2-3 3L10 50c-2 0-3-1-3-3s1-2 3-3z"/>
+  <!-- Front arm supporting -->
+  <path d="M62 34l-2 22c0 1 1 2 2 2s2-1 2-2l3-20z"/>
+  <!-- Back leg extended, foot at heel -->
+  <path d="M12 48c-2 4-4 8-6 10-1 1-1 3 0 3s3-1 4-2l6-8z"/>
+  <rect x="4" y="60" width="72" height="3" rx="1.5"/>
+</svg>
