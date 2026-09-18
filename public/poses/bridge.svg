@@ -1,11 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" fill="#f4ecda" aria-hidden="true">
-  <!-- Shoulder Bridge: hips lifted, feet on mat, shoulders on mat -->
-  <circle cx="14" cy="42" r="4"/>
-  <!-- Body arching up -->
-  <path d="M16 42c4 0 8-1 12-4l14-10c4-3 8-4 12-4l10 1c1 0 2 1 2 2s-1 2-2 2h-10c-3 0-6 1-9 3L30 42c-3 3-8 4-14 4z"/>
-  <!-- Arms flat on mat -->
-  <path d="M16 46l-4 12c0 1 0 2 1 2s2 0 2-1l4-11z"/>
-  <!-- Legs bent, feet planted -->
-  <path d="M58 30l6 24c0 1-1 2-2 2s-2-1-2-2l-4-20z"/>
-  <rect x="6" y="60" width="70" height="3" rx="1.5"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#e8c65c" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+  <!-- Balance scale — Balance -->
+  <path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/>
+  <path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/>
+  <path d="M7 21h10"/>
+  <path d="M12 3v18"/>
+  <path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/>
 </svg>

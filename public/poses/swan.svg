@@ -1,11 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" fill="#f4ecda" aria-hidden="true">
-  <!-- Swan / Cobra: prone chest lift with arms supporting -->
-  <circle cx="18" cy="26" r="4"/>
-  <!-- Upper body arching up -->
-  <path d="M20 30c4 0 8 1 12 4l16 12c2 2 4 3 6 3l8 1c1 0 2 1 2 2s-1 2-2 2h-9c-3 0-6-1-8-3L28 39c-2-2-4-3-6-3z"/>
-  <!-- Arms supporting -->
-  <path d="M22 32l-3 20c0 1 1 2 2 2s2-1 2-2l3-16z"/>
-  <!-- Legs extended back -->
-  <path d="M34 42c6 4 14 8 22 10l14 4c1 0 2 1 2 2s-1 2-2 2l-15-3c-9-2-18-6-25-11z"/>
-  <rect x="10" y="62" width="60" height="3" rx="1.5"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#e8c65c" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+  <!-- Move / arrows out — Mobility -->
+  <path d="M12 2v20"/>
+  <path d="M2 12h20"/>
+  <path d="m7 7-5 5 5 5"/>
+  <path d="m17 7 5 5-5 5"/>
+  <path d="m7 17 5 5 5-5"/>
+  <path d="m7 7 5-5 5 5"/>
 </svg>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import {
   motion,
@@ -25,14 +25,13 @@ import { useIsTouch } from "@/lib/useReducedMotion";
  *     </div>
  *   </section>
  *
- * Each of the 4 sequence frames owns 1/N of the scroll travel. All four
- * cycle in place while the hero stays pinned to the viewport, then the
- * pin releases and the page continues down to the next section. The
- * `min-h-svh` wrapper ensures the pin lasts even if the user has a
- * short viewport.
+ * On mobile / touch we drop the pin and auto-cycle a single image column
+ * every 3.5 s so the same "keeps moving" story reads without depending
+ * on touch scroll + pin (which fights native scrolling on iOS).
  *
- * On mobile / touch we drop the pin (touch scroll + pins is fussy) and
- * just show a single hero frame in a normal-height section.
+ * Explicit heights on every wrapper — the previous version relied on
+ * grid + flex stretching, which sometimes collapsed the image column
+ * when the copy column's intrinsic height was low.
  */
 export default function Hero() {
   const touch = useIsTouch();
@@ -47,9 +46,6 @@ function DesktopHero() {
 
   const { scrollYProgress } = useScroll({
     target: wrapper,
-    // start when the top of the wrapper hits the top of the viewport, end
-    // when the BOTTOM of the wrapper hits the top of the viewport — i.e.
-    // the entire tall wrapper's scroll.
     offset: ["start start", "end end"],
   });
 
@@ -66,7 +62,6 @@ function DesktopHero() {
     my.set(e.clientY / window.innerHeight - 0.5);
   };
 
-  // Ken-Burns lift over the WHOLE pin (subtle, not per-frame).
   const stackScale = useTransform(scrollYProgress, [0, 1], [1, 1.05]);
 
   return (
@@ -77,10 +72,10 @@ function DesktopHero() {
       style={{ height: `${N * 100}svh`, minHeight: `${N * 640}px` }}
       data-cursor="scroll"
     >
-      <div className="sticky top-0 flex h-svh min-h-[640px] items-stretch overflow-hidden pt-24">
-        <div className="container-page grid w-full grid-cols-12 gap-8">
+      <div className="sticky top-0 h-svh min-h-[640px] w-full overflow-hidden pt-20">
+        <div className="container-page grid h-full w-full grid-cols-12 gap-8 pb-8">
           {/* ---------- Copy column ---------- */}
-          <div className="col-span-5 flex flex-col justify-between">
+          <div className="col-span-5 flex h-full flex-col justify-between">
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
@@ -144,7 +139,7 @@ function DesktopHero() {
               </motion.div>
             </div>
 
-            <div className="flex items-center gap-6 pb-10">
+            <div className="flex items-center gap-6 pb-6">
               <div className="flex flex-col">
                 <span className="font-display text-4xl text-cream">1,000+</span>
                 <span className="eyebrow mt-1 text-cream/60">Clients trained</span>
@@ -157,10 +152,10 @@ function DesktopHero() {
             </div>
           </div>
 
-          {/* ---------- Sequence column ---------- */}
+          {/* ---------- Sequence column (explicit height so it never collapses) ---------- */}
           <motion.div
             style={{ scale: stackScale, x: parX }}
-            className="relative col-span-7 self-stretch overflow-hidden rounded-[var(--radius-lg)]"
+            className="relative col-span-7 h-full min-h-[500px] overflow-hidden rounded-[var(--radius-lg)] bg-ash"
           >
             {hero.sequence.map((id, i) => (
               <SequenceFrame
@@ -177,7 +172,6 @@ function DesktopHero() {
 
             <div className="pointer-events-none absolute inset-0 rounded-[var(--radius-lg)] ring-1 ring-inset ring-cream/10" />
 
-            {/* Frame progress rail — bottom */}
             <div className="pointer-events-none absolute inset-x-6 bottom-6 flex items-center gap-3">
               <FrameCounter progress={scrollYProgress} total={N} />
               <div className="relative h-px flex-1 bg-cream/20">
@@ -200,18 +194,38 @@ function DesktopHero() {
 /* -------------------------------- Mobile --------------------------------- */
 
 function MobileHero() {
+  // Auto-cycle through the sequence every 3.5 s — same "she keeps moving"
+  // story without depending on scroll pins that fight touch scroll.
+  const [idx, setIdx] = useState(0);
+  const N = hero.sequence.length;
+
+  useEffect(() => {
+    const t = window.setInterval(() => setIdx((n) => (n + 1) % N), 3500);
+    return () => window.clearInterval(t);
+  }, [N]);
+
   return (
     <section className="relative min-h-[100svh] overflow-hidden bg-noir pt-24">
-      {/* Full-bleed background image (only one — mobile keeps it simple) */}
+      {/* Auto-cycling full-bleed background */}
       <div className="absolute inset-0 -z-10">
-        <Image
-          src={img(hero.sequence[0], 1400, 72)}
-          alt="Pilates practitioner at the studio"
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover"
-        />
+        {hero.sequence.map((id, i) => (
+          <motion.div
+            key={id + i}
+            className="absolute inset-0"
+            initial={false}
+            animate={{ opacity: i === idx ? 1 : 0 }}
+            transition={{ duration: 1.2, ease: EASE.outSoft }}
+          >
+            <Image
+              src={img(id, 1400, 72)}
+              alt={`Pilates practitioner, pose ${i + 1}`}
+              fill
+              priority={i === 0}
+              sizes="100vw"
+              className="object-cover"
+            />
+          </motion.div>
+        ))}
         {/* Legible-copy scrim */}
         <div className="absolute inset-0 bg-gradient-to-t from-noir via-noir/70 to-noir/40" />
       </div>
@@ -287,6 +301,16 @@ function MobileHero() {
               <span className="eyebrow mt-1 text-cream/60">Studios</span>
             </div>
           </div>
+
+          {/* Pose counter for the auto-cycle */}
+          <div className="mt-6 flex items-center gap-2">
+            {hero.sequence.map((_, i) => (
+              <span
+                key={i}
+                className={`h-1 flex-1 rounded-full transition-colors ${i === idx ? "bg-gold" : "bg-cream/20"}`}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </section>
@@ -313,12 +337,10 @@ function SequenceFrame({
   priority?: boolean;
 }) {
   const slot = 1 / total;
-  // Wider fade windows so consecutive frames overlap smoothly.
   const start = Math.max(0, index * slot - slot * 0.5);
   const peak = index * slot + slot * 0.15;
   const end = Math.min(1, index * slot + slot * 1.35);
 
-  // First frame stays fully visible at scroll=0, last stays fully visible at scroll=1.
   const opacity = useTransform(
     progress,
     [start, peak, end],
