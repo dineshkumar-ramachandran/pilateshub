@@ -13,7 +13,6 @@ import {
 import { hero, img, whatsappUrl } from "@/lib/content";
 import { DUR, EASE } from "@/lib/motion";
 import { LinkButton } from "@/components/ui/Button";
-import { useIsTouch } from "@/lib/useReducedMotion";
 
 /**
  * Hero — the practitioner keeps moving as you scroll.
@@ -34,8 +33,19 @@ import { useIsTouch } from "@/lib/useReducedMotion";
  * when the copy column's intrinsic height was low.
  */
 export default function Hero() {
-  const touch = useIsTouch();
-  return touch ? <MobileHero /> : <DesktopHero />;
+  // Render both variants — CSS breakpoints show the right one.
+  // (Using `useIsTouch` alone caused a flash of the desktop hero on mobile
+  //  because it returns false during SSR + first client render.)
+  return (
+    <>
+      <div className="hidden md:block">
+        <DesktopHero />
+      </div>
+      <div className="md:hidden">
+        <MobileHero />
+      </div>
+    </>
+  );
 }
 
 /* ------------------------------- Desktop --------------------------------- */
@@ -205,9 +215,13 @@ function MobileHero() {
   }, [N]);
 
   return (
-    <section className="relative min-h-[100svh] overflow-hidden bg-noir pt-24">
-      {/* Auto-cycling full-bleed background */}
-      <div className="absolute inset-0 -z-10">
+    <section className="relative min-h-[100svh] overflow-hidden bg-noir pt-24 isolate">
+      {/* Auto-cycling full-bleed background.
+          `isolate` on the section creates a stacking context so `z-0` children
+          paint ABOVE the section's bg-noir background (without `isolate`,
+          negative z-index children fall behind the parent's background — the
+          bug that hid the mobile hero images). */}
+      <div className="absolute inset-0 z-0">
         {hero.sequence.map((id, i) => (
           <motion.div
             key={id + i}
@@ -230,7 +244,7 @@ function MobileHero() {
         <div className="absolute inset-0 bg-gradient-to-t from-noir via-noir/70 to-noir/40" />
       </div>
 
-      <div className="container-page flex min-h-[calc(100svh-6rem)] flex-col justify-between pb-10">
+      <div className="container-page relative z-10 flex min-h-[calc(100svh-6rem)] flex-col justify-between pb-10">
         <motion.span
           className="eyebrow text-gold"
           initial={{ opacity: 0, y: 16 }}
