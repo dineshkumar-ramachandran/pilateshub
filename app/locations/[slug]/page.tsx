@@ -1,15 +1,23 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import Image from "next/image";
-import { locations, sessions, site, img, whatsappUrl } from "@/lib/content";
+import {
+  locations,
+  sessions,
+  BOOKING_POLICY,
+  amenitiesFor,
+  whatsappUrl,
+} from "@/lib/content";
+import { LocationHeader } from "@/components/locations/LocationHeader";
+import { LocationGallery } from "@/components/locations/LocationGallery";
+import { TrustBadges } from "@/components/locations/TrustBadges";
+import { AmenityIcon } from "@/components/locations/AmenityIcon";
 import { SectionLabel } from "@/components/ui/SectionLabel";
-import { RevealText } from "@/components/motion/RevealText";
-import { Reveal } from "@/components/motion/Reveal";
 import { LinkButton } from "@/components/ui/Button";
+import { Reveal } from "@/components/motion/Reveal";
+import Link from "next/link";
 
 type Params = { slug: string };
 
-// Only pre-render active studios; coming-soon stays on the index.
 export function generateStaticParams() {
   return locations.map((l) => ({ slug: l.slug }));
 }
@@ -29,54 +37,43 @@ export async function generateMetadata({
   };
 }
 
-export default async function LocationDetail({ params }: { params: Promise<Params> }) {
+export default async function LocationOverview({ params }: { params: Promise<Params> }) {
   const { slug } = await params;
   const loc = locations.find((l) => l.slug === slug);
   if (!loc) notFound();
 
+  const amenities = amenitiesFor(slug);
+
   return (
     <>
-      {/* Hero */}
-      <section className="relative flex min-h-[70svh] items-end overflow-hidden pt-32 text-cream">
-        <div className="absolute inset-0 -z-10">
-          <Image
-            src={img(loc.image, 2000, 74)}
-            alt={`${loc.name} studio`}
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/25 to-ink/40" />
-        </div>
-        <div className="container-page pb-14">
-          <SectionLabel className="text-cream/70">{loc.city}</SectionLabel>
-          <RevealText
-            as="h1"
-            text={loc.name}
-            by="word"
-            className="mt-6 font-display text-[length:var(--text-hero)] leading-[0.9] text-cream"
-          />
+      <LocationHeader loc={loc} />
+
+      {/* Gallery */}
+      <section className="bg-noir py-16 md:py-20">
+        <div className="container-page">
+          <SectionLabel>Studio · Inside look</SectionLabel>
+          <h2 className="mt-6 max-w-2xl font-display text-[length:var(--text-h2)] leading-tight text-cream">
+            Inside the {loc.name} studio.
+          </h2>
+          <div className="mt-10">
+            <LocationGallery images={loc.gallery} name={loc.name} />
+          </div>
         </div>
       </section>
 
-      {/* Details */}
-      <section className="bg-noir py-20 md:py-28">
+      {/* Snapshot: address, hours, apparatus, amenity preview */}
+      <section className="bg-coal py-16 md:py-24">
         <div className="container-page grid gap-14 md:grid-cols-12">
           <div className="md:col-span-5">
             <SectionLabel>Visit</SectionLabel>
             <p className="mt-6 max-w-sm text-[length:var(--text-lead)] leading-relaxed text-cream">
               {loc.address}
             </p>
-            <ul className="mt-8 space-y-3">
+
+            <ul className="mt-8 space-y-3 text-sm">
               <li>
                 <a href={`tel:${loc.phoneRaw}`} className="link-underline text-cream">
                   {loc.phone}
-                </a>
-              </li>
-              <li>
-                <a href={`mailto:${site.email}`} className="link-underline text-cream">
-                  {site.email}
                 </a>
               </li>
             </ul>
@@ -92,6 +89,10 @@ export default async function LocationDetail({ params }: { params: Promise<Param
               ))}
             </dl>
 
+            <p className="mt-6 font-mono text-[0.7rem] uppercase tracking-[0.2em] text-gold">
+              {BOOKING_POLICY.headline}
+            </p>
+
             <ul className="mt-8 flex flex-wrap gap-2 text-[0.7rem] uppercase tracking-[0.18em] text-cream/70">
               {loc.apparatus.map((a) => (
                 <li
@@ -102,6 +103,7 @@ export default async function LocationDetail({ params }: { params: Promise<Param
                 </li>
               ))}
             </ul>
+
             <div className="mt-10 flex flex-wrap gap-4">
               <LinkButton
                 href={whatsappUrl(`Hi PilatesHub, I'd like to book at ${loc.name}.`)}
@@ -119,12 +121,34 @@ export default async function LocationDetail({ params }: { params: Promise<Param
             </div>
           </div>
 
+          {/* Amenity preview + map */}
           <div className="md:col-span-7">
-            <div className="overflow-hidden rounded-[var(--radius-lg)] border border-line">
+            <SectionLabel>Amenities at this branch</SectionLabel>
+            <ul className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3">
+              {amenities.map((a) => (
+                <li
+                  key={a.key}
+                  className="flex items-center gap-3 rounded-[var(--radius-md)] border border-line bg-noir/60 px-3 py-2.5"
+                >
+                  <span className="grid h-8 w-8 place-items-center rounded-full border border-gold/40 text-gold">
+                    <AmenityIcon name={a.key} className="h-4 w-4" />
+                  </span>
+                  <span className="text-sm text-cream">{a.label}</span>
+                </li>
+              ))}
+            </ul>
+            <Link
+              href={`/locations/${loc.slug}/amenities`}
+              className="link-underline mt-6 inline-block text-sm text-gold"
+            >
+              All amenities & facilities →
+            </Link>
+
+            <div className="mt-10 overflow-hidden rounded-[var(--radius-lg)] border border-line">
               <iframe
                 title={`${loc.name} location map`}
                 src={`https://www.google.com/maps?q=${encodeURIComponent(loc.mapsQuery)}&output=embed`}
-                className="h-[420px] w-full"
+                className="h-[360px] w-full"
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
               />
@@ -133,19 +157,38 @@ export default async function LocationDetail({ params }: { params: Promise<Param
         </div>
       </section>
 
-      {/* Sessions available here */}
-      <section className="bg-coal py-20 md:py-24">
+      {/* Trust markers */}
+      <section className="bg-noir py-16 md:py-20">
         <div className="container-page">
-          <SectionLabel>Available here</SectionLabel>
+          <SectionLabel>Why train here</SectionLabel>
+          <div className="mt-8">
+            <TrustBadges />
+          </div>
+        </div>
+      </section>
+
+      {/* Programs at this branch */}
+      <section className="bg-coal py-16 md:py-20">
+        <div className="container-page">
+          <SectionLabel>Programs available</SectionLabel>
           <div className="mt-10 grid gap-x-10 gap-y-8 sm:grid-cols-2 lg:grid-cols-4">
             {sessions.map((s) => (
               <Reveal key={s.slug}>
                 <div className="border-t border-line pt-5">
-                  <h3 className="font-display text-[length:var(--text-h3)] text-cream">{s.title}</h3>
+                  <h3 className="font-display text-[length:var(--text-h3)] text-cream">
+                    {s.title}
+                  </h3>
                   <p className="mt-2 text-sm text-mist">{s.copy}</p>
                 </div>
               </Reveal>
             ))}
+          </div>
+
+          <div className="mt-12 flex flex-wrap gap-4">
+            <LinkButton href={`/locations/${loc.slug}/book`}>Book a visit</LinkButton>
+            <LinkButton href={`/locations/${loc.slug}/amenities`} variant="outline">
+              See amenities
+            </LinkButton>
           </div>
         </div>
       </section>

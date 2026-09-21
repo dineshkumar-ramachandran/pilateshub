@@ -32,10 +32,19 @@ function validate(fd: FormData): Record<string, string> {
   return errors;
 }
 
-export default function EnquiryForm() {
+export default function EnquiryForm({
+  defaultLocation,
+  defaultInterest,
+}: {
+  /** Pre-select a location on the Preferred location dropdown. */
+  defaultLocation?: string;
+  /** Pre-select a session on the Interested in dropdown. */
+  defaultInterest?: string;
+} = {}) {
   const [status, setStatus] = useState<Status>("idle");
   const [errors, setErrors] = useState<Record<string, string>>({});
   const activeLocations = locations.filter((l) => l.status === "active");
+  const initialLocation = defaultLocation ?? activeLocations[0]?.name;
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -140,7 +149,7 @@ export default function EnquiryForm() {
           onChange={() => clearError("phone")}
           error={errors.phone}
         />
-        <Select label="Interested in" name="interest" defaultValue="">
+        <Select label="Interested in" name="interest" defaultValue={defaultInterest ?? ""}>
           <option value="" disabled>
             Select a session
           </option>
@@ -152,7 +161,7 @@ export default function EnquiryForm() {
           <option value="Not sure yet">Not sure yet</option>
         </Select>
       </div>
-      <Select label="Preferred location" name="location" defaultValue={activeLocations[0]?.name}>
+      <Select label="Preferred location" name="location" defaultValue={initialLocation}>
         {activeLocations.map((l) => (
           <option key={l.slug} value={l.name}>
             {l.name}, {l.city}

@@ -178,6 +178,47 @@ const APPARATUS_ALL = [
   "Pilates accessories",
 ] as const;
 
+// Real, in-studio photography — same set used across all three
+// per-location pages (Overview / Amenities / Book).
+export const LOCATION_GALLERY = [
+  "/locations/1.jpg",
+  "/locations/2.jpg",
+  "/locations/3.jpg",
+  "/locations/4.jpg",
+  "/locations/5.jpg",
+  "/locations/6.jpg",
+  "/locations/7.jpg",
+] as const;
+
+// Every amenity we offer. `showersAt` lists the branches where the
+// showers amenity is available (HSR does not have showers).
+export const AMENITIES = [
+  { key: "parking", label: "Parking", copy: "Convenient parking outside the studio." },
+  { key: "lockers", label: "Lockers", copy: "Personal lockers for every session." },
+  { key: "changing", label: "Changing rooms", copy: "Private changing rooms." },
+  { key: "ac", label: "Air-conditioned", copy: "Climate-controlled training floor." },
+  { key: "refreshments", label: "Water & refreshments", copy: "Filtered water and light refreshments." },
+  { key: "wifi", label: "Wi-Fi", copy: "Complimentary Wi-Fi for members." },
+  { key: "showers", label: "Showers", copy: "Post-session showers." },
+] as const;
+
+// Trust markers shown on every location page.
+export const TRUST_BADGES = [
+  { label: "Certified trainers", copy: "Every session is led by professionally trained Pilates instructors." },
+  { label: "Knowledgeable team", copy: "Deep familiarity with the classical apparatus and movement principles." },
+  { label: "Daily hygiene & sanitation", copy: "Equipment cleaned and sanitised between every session." },
+  { label: "Beginner-friendly", copy: "Programs adapt to every level — first-timers welcome." },
+] as const;
+
+// Booking policy — shared across all locations.
+export const BOOKING_POLICY = {
+  headline: "By appointment only",
+  copy: "Sessions run to a schedule and require a booking. Reach out via WhatsApp, call, or the enquiry form and our team will confirm your slot.",
+} as const;
+
+// Unified timings — 6 AM to 9 PM, Mon–Sat, all branches.
+const UNIFIED_HOURS = [{ days: "Mon – Sat", time: "6 AM – 9 PM" }] as const;
+
 export const locations = [
   {
     slug: "hsr-layout",
@@ -188,11 +229,10 @@ export const locations = [
       "2577, 13th Cross, 27th Main Rd, next to Trishan School of Music HSR, 1st Sector, HSR Layout, Bengaluru, Karnataka 560102",
     phone: "+91 90196 42798",
     phoneRaw: "919019642798",
-    hours: [
-      { days: "Mon – Sat", time: "6 AM – 9 AM" },
-      { days: "Sunday", time: "8 AM – 12 PM" },
-    ],
+    hours: UNIFIED_HOURS,
     apparatus: APPARATUS_ALL,
+    amenityKeys: ["parking", "lockers", "changing", "ac", "refreshments", "wifi"] as const,
+    gallery: LOCATION_GALLERY,
     mapsQuery:
       "PilatesHub, 2577, 13th Cross, 27th Main Rd, HSR Layout, Bengaluru 560102",
     geo: { lat: 12.9121, lng: 77.6446 },
@@ -207,8 +247,10 @@ export const locations = [
       "1st floor, Bhupal Reddy Building, Sy.no 16, Gear School Rd, opposite Axis Bank, Devarabisanahalli, Bellandur, Bengaluru, Karnataka 560103",
     phone: "+91 91872 17515",
     phoneRaw: "919187217515",
-    hours: [{ days: "Mon – Sat", time: "7 AM – 8 PM" }],
+    hours: UNIFIED_HOURS,
     apparatus: APPARATUS_ALL,
+    amenityKeys: ["parking", "lockers", "changing", "ac", "refreshments", "wifi", "showers"] as const,
+    gallery: LOCATION_GALLERY,
     mapsQuery:
       "PilatesHub, Bhupal Reddy Building, Gear School Rd, Bellandur, Bengaluru 560103",
     geo: null,
@@ -223,14 +265,24 @@ export const locations = [
       "Ground Floor, SR Complex, 2, Tavarekere Main Rd, DRC Post, Kaveri Layout, S.G. Palya, Bengaluru, Karnataka 560029",
     phone: "+91 99022 29199",
     phoneRaw: "919902229199",
-    hours: [{ days: "Mon – Sat", time: "6 AM – 9 PM" }],
+    hours: UNIFIED_HOURS,
     apparatus: APPARATUS_ALL,
+    amenityKeys: ["parking", "lockers", "changing", "ac", "refreshments", "wifi", "showers"] as const,
+    gallery: LOCATION_GALLERY,
     mapsQuery:
       "PilatesHub, SR Complex, Tavarekere Main Rd, S.G. Palya, Bengaluru 560029",
     geo: null,
     image: "1571902943202-507ec2618e8f",
   },
 ] as const;
+
+/** Resolve a location's amenity records (in order). */
+export function amenitiesFor(slug: string) {
+  const loc = locations.find((l) => l.slug === slug);
+  if (!loc) return [] as Array<(typeof AMENITIES)[number]>;
+  const keys = new Set<string>(loc.amenityKeys);
+  return AMENITIES.filter((a) => keys.has(a.key));
+}
 
 /* ------------------------------- Equipment -------------------------------- */
 // Real apparatus list from pilateshub.in (the studio also sells equipment).
