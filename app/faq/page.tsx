@@ -1,11 +1,14 @@
-import { JsonLd, faqSchema } from "@/lib/schema";
+import PageHeader from "@/components/ui/PageHeader";
 
 export default function FaqPage() {
   return (
-    <div style={{ padding: "8rem 2rem", color: "white", background: "#111" }}>
-      <JsonLd data={faqSchema} />
-      <h1>FAQ with JsonLd only</h1>
-      <p>If this renders, JsonLd is not the crash. If it crashes, JsonLd is.</p>
+    <div style={{ background: "#111", color: "white", minHeight: "100svh" }}>
+      <PageHeader
+        eyebrow="Questions"
+        title="Everything you might ask."
+        intro="Testing PageHeader alone."
+      />
+      <p style={{ padding: "2rem" }}>PageHeader-only diagnostic</p>
     </div>
   );
 }
