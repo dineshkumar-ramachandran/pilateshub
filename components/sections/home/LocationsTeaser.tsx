@@ -2,8 +2,9 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
-import { locations, img } from "@/lib/content";
+import { locations } from "@/lib/content";
 import { DUR, EASE } from "@/lib/motion";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 
@@ -64,18 +65,27 @@ export default function LocationsTeaser() {
                     ))}
                   </dl>
 
-                  <a
-                    href="#contact"
-                    className="link-underline mt-4 inline-block text-sm text-gold"
-                  >
-                    Book a visit →
-                  </a>
+                  {/* Two CTAs — Book a visit (Book page) + Take a look (Overview page) */}
+                  <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm">
+                    <Link
+                      href={`/locations/${l.slug}/book`}
+                      className="link-underline text-gold"
+                    >
+                      Book a visit →
+                    </Link>
+                    <Link
+                      href={`/locations/${l.slug}`}
+                      className="link-underline text-cream/85"
+                    >
+                      Take a look →
+                    </Link>
+                  </div>
                 </div>
               );
             })}
           </div>
 
-          {/* Visual */}
+          {/* Visual — real studio photo from the shared gallery */}
           <div className="relative aspect-[4/3] overflow-hidden rounded-[var(--radius-lg)] bg-ash md:aspect-auto">
             <AnimatePresence mode="wait">
               <motion.div
@@ -87,12 +97,20 @@ export default function LocationsTeaser() {
                 transition={{ duration: DUR.standard, ease: EASE.outSoft }}
               >
                 <Image
-                  src={img(current.image, 1100, 72)}
+                  src={current.gallery[0]}
                   alt={`${current.name} studio`}
                   fill
                   sizes="(max-width: 768px) 100vw, 45vw"
                   className="object-cover"
                 />
+                {/* Soft gradient so the label reads on any photo */}
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-noir/80 via-noir/10 to-transparent" />
+                <Link
+                  href={`/locations/${current.slug}`}
+                  className="absolute bottom-5 left-5 rounded-[var(--radius-pill)] bg-noir/85 px-4 py-2 font-mono text-[0.7rem] uppercase tracking-[0.2em] text-gold backdrop-blur-md hover:bg-gold hover:text-noir"
+                >
+                  Take a look at {current.name} →
+                </Link>
               </motion.div>
             </AnimatePresence>
           </div>
