@@ -1,8 +1,17 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
+import { usePathname } from "next/navigation";
 import { nav, site, whatsappUrl } from "@/lib/content";
 import { EASE, DUR } from "@/lib/motion";
+
+/** Anchor hrefs (#about, #method, …) only exist on the homepage. When the
+ *  visitor is on any other route, prefix them with `/` so the click first
+ *  navigates back home and then scrolls to the section. */
+function navHref(href: string, isHome: boolean): string {
+  if (!href.startsWith("#")) return href;
+  return isHome ? href : `/${href}`;
+}
 
 export default function MobileMenu({
   open,
@@ -11,6 +20,8 @@ export default function MobileMenu({
   open: boolean;
   onClose: () => void;
 }) {
+  const pathname = usePathname();
+  const isHome = pathname === "/";
   return (
     <AnimatePresence>
       {open && (
@@ -42,7 +53,7 @@ export default function MobileMenu({
                 transition={{ delay: 0.15 + i * 0.06, duration: DUR.slow, ease: EASE.outSoft }}
               >
                 <a
-                  href={item.href}
+                  href={navHref(item.href, isHome)}
                   onClick={onClose}
                   className="block w-full text-left font-display text-[13vw] leading-[1.05] tracking-tight text-cream/90 transition-colors hover:text-gold"
                 >

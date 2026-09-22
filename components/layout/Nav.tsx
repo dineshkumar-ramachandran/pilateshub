@@ -1,13 +1,24 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import { nav, whatsappUrl } from "@/lib/content";
 import { LinkButton } from "@/components/ui/Button";
 import MobileMenu from "./MobileMenu";
 
+/** Turn a hero anchor like "#about" into a hop-back-to-home link when the
+ *  user is on any non-homepage route. On the homepage keep the raw anchor
+ *  so it just scrolls. */
+function navHref(href: string, isHome: boolean): string {
+  if (!href.startsWith("#")) return href;
+  return isHome ? href : `/${href}`;
+}
+
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
+  const isHome = pathname === "/";
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -41,7 +52,7 @@ export default function Nav() {
       >
         <div className="container-page flex items-center justify-between">
           <a
-            href="#top"
+            href={isHome ? "#top" : "/"}
             className="font-display text-xl tracking-tight text-cream sm:text-2xl"
             aria-label="PilatesHub home"
           >
@@ -52,7 +63,7 @@ export default function Nav() {
             {nav.map((item) => (
               <a
                 key={item.href}
-                href={item.href}
+                href={navHref(item.href, isHome)}
                 className="link-underline text-sm font-medium tracking-wide text-cream transition-colors hover:text-gold"
               >
                 {item.label}
