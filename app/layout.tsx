@@ -5,9 +5,8 @@ import { site } from "@/lib/content";
 import SmoothScroll from "@/components/layout/SmoothScroll";
 import Nav from "@/components/layout/Nav";
 import Footer from "@/components/layout/Footer";
-// Temporarily disabled while diagnosing tab crash on non-homepage routes:
-// import Cursor from "@/components/layout/Cursor";
-// import ScrollProgress from "@/components/layout/ScrollProgress";
+import Cursor from "@/components/layout/Cursor";
+import ScrollProgress from "@/components/layout/ScrollProgress";
 
 const fraunces = Fraunces({
   variable: "--font-fraunces",
@@ -69,9 +68,13 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${fraunces.variable} ${inter.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full">
+        <ScrollProgress />
+        <Cursor />
         <Nav />
-        <main id="main">{children}</main>
-        <Footer />
+        <SmoothScroll>
+          <main id="main">{children}</main>
+          <Footer />
+        </SmoothScroll>
       </body>
     </html>
   );

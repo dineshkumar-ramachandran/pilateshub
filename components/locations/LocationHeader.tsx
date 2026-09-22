@@ -1,6 +1,5 @@
 import Image from "next/image";
 import { SectionLabel } from "@/components/ui/SectionLabel";
-import { RevealText } from "@/components/motion/RevealText";
 import { LocationTabs } from "./LocationTabs";
 
 type Loc = {
@@ -34,12 +33,9 @@ export function LocationHeader({ loc }: { loc: Loc }) {
 
         <div className="container-page relative z-10 flex min-h-[calc(60svh-6rem)] flex-col justify-end pb-10">
           <SectionLabel className="text-cream/70">{loc.city}</SectionLabel>
-          <RevealText
-            as="h1"
-            text={loc.name}
-            by="word"
-            className="mt-6 pb-2 font-display text-[length:var(--text-hero)] leading-[0.9] text-cream"
-          />
+          <h1 className="mt-6 pb-2 font-display text-[length:var(--text-hero)] leading-[0.9] text-cream">
+            {loc.name}
+          </h1>
           <p className="mt-6 max-w-2xl text-cream/80">{loc.address}</p>
         </div>
       </section>
