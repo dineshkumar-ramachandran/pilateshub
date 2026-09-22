@@ -1,12 +1,9 @@
 import { SectionLabel } from "@/components/ui/SectionLabel";
-import { Reveal } from "@/components/motion/Reveal";
 
 /**
- * Page-level header (used by /about, /faq, /contact, /equipment, /sessions,
- * /method, /locations). Previously used a framer-motion RevealText at the
- * top of the page which crashed the browser tab on Chrome/Brave/mobile
- * when it was the first paintable element in the viewport at mount.
- * Now renders a plain, guaranteed-visible <h1>.
+ * Page-level header. Uses NO client-side motion components because
+ * useInView + motion.div at the top of the viewport at mount was
+ * causing renderer crashes in Chrome/Brave (both desktop and mobile).
  */
 export default function PageHeader({
   eyebrow,
@@ -30,9 +27,7 @@ export default function PageHeader({
           ))}
         </h1>
         {intro && (
-          <Reveal delay={0.1}>
-            <p className="mt-8 max-w-2xl text-[length:var(--text-lead)] text-mist">{intro}</p>
-          </Reveal>
+          <p className="mt-8 max-w-2xl text-[length:var(--text-lead)] text-mist">{intro}</p>
         )}
       </div>
     </header>
