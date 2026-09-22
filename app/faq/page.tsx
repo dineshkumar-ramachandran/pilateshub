@@ -1,8 +1,11 @@
+import { JsonLd, faqSchema } from "@/lib/schema";
+
 export default function FaqPage() {
   return (
     <div style={{ padding: "8rem 2rem", color: "white", background: "#111" }}>
-      <h1>Hello from FAQ (minimal build)</h1>
-      <p>If this renders in the browser, the layout is fine and the crash is in the page component.</p>
+      <JsonLd data={faqSchema} />
+      <h1>FAQ with JsonLd only</h1>
+      <p>If this renders, JsonLd is not the crash. If it crashes, JsonLd is.</p>
     </div>
   );
 }
