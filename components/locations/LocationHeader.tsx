@@ -26,7 +26,7 @@ export function LocationHeader({ loc }: { loc: Loc }) {
             alt={`${loc.name} studio`}
             fill
             priority
-            sizes="100vw"
+            sizes="(max-width: 1400px) 100vw, 1400px"
             className="object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-noir via-noir/60 to-noir/30" />
