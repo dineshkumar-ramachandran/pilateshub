@@ -5,15 +5,22 @@ import { useEffect, useRef, useState, type RefObject } from "react";
 /**
  * Manual IntersectionObserver hook with belt-and-braces fallbacks.
  *
+ * Critical fix: the immediate-visibility check that used to fire `setInView(true)`
+ * synchronously inside the mount `useEffect` was crashing the browser tab on
+ * Chrome + Brave (both desktop and mobile) when it wrapped a framer-motion
+ * `motion.div` that was above the fold at hydration. The crash happened because
+ * the state update ran in the same tick as framer-motion's initial mount, and
+ * the resulting re-render triggered an animation before the initial DOM was
+ * fully committed — producing a renderer crash ("This page couldn't load")
+ * on the affected pages. Deferring the reveal by one animation frame fixes it.
+ *
  * Why not framer-motion's `whileInView`: it fires unreliably in this project
- * (Lenis smooth scroll appears to interfere with FM's internal viewport
- * detection). This hook uses a plain IntersectionObserver plus:
- *   - an immediate position check on mount (already visible → reveal now)
+ * (Lenis smooth scroll interferes with FM's internal viewport detection).
+ * This hook uses a plain IntersectionObserver plus:
+ *   - a **deferred** immediate position check (already visible → reveal on
+ *     the next animation frame, not synchronously during mount)
  *   - a scroll-listener fallback that runs while `inView` is still false
  *   - a `visibilitychange` re-check for tabs that were backgrounded
- *
- * Together these make revealing bulletproof across smooth-scroll, hash-jumps,
- * bfcache restores, and briefly-hidden tabs.
  */
 export function useInView<T extends HTMLElement>(
   ref: RefObject<T | null>,
@@ -30,6 +37,8 @@ export function useInView<T extends HTMLElement>(
     const el = ref.current;
     if (!el) return;
 
+    let rafId = 0;
+
     const isVisibleNow = () => {
       const r = el.getBoundingClientRect();
       const vh = window.innerHeight || document.documentElement.clientHeight;
@@ -41,17 +50,21 @@ export function useInView<T extends HTMLElement>(
 
     const reveal = () => {
       if (latched.current) return;
-      setInView(true);
-      if (once) {
-        latched.current = true;
-        cleanup();
-      }
+      // Defer state update until the next frame so framer-motion (or anything
+      // else listening for our state) has finished its initial mount cycle.
+      rafId = requestAnimationFrame(() => {
+        if (latched.current) return;
+        setInView(true);
+        if (once) {
+          latched.current = true;
+          cleanup();
+        }
+      });
     };
 
-    // Immediate check
+    // Immediate position check (deferred one frame via reveal())
     if (isVisibleNow()) {
       reveal();
-      if (latched.current) return;
     }
 
     // Primary: IntersectionObserver
@@ -83,6 +96,7 @@ export function useInView<T extends HTMLElement>(
     document.addEventListener("visibilitychange", onVis);
 
     function cleanup() {
+      if (rafId) cancelAnimationFrame(rafId);
       io.disconnect();
       window.removeEventListener("scroll", onScroll);
       document.removeEventListener("visibilitychange", onVis);
