@@ -100,9 +100,16 @@ function DesktopHero() {
                 style={{ fontSize: "var(--text-hero)", lineHeight: 0.95, paddingBottom: "0.12em" }}
               >
                 {hero.lines.map((line, i) => (
-                  <span key={i} className="block overflow-hidden">
+                  <span
+                    key={i}
+                    className="block"
+                    // clip-path masks the vertical slide-up reveal but lets
+                    // wide words like "Physical" spill horizontally into the
+                    // image column instead of being cut off at col-span-5.
+                    style={{ clipPath: "inset(0 -100vw 0 0)" }}
+                  >
                     <motion.span
-                      className="inline-block"
+                      className="inline-block whitespace-nowrap"
                       initial={{ y: "115%" }}
                       animate={{ y: "0%" }}
                       transition={{

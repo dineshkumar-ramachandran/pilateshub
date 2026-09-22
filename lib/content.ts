@@ -153,6 +153,7 @@ export const sessions = [
     copy: "Rehabilitation-focused Pilates for recovery from injury or chronic movement issues, delivered as personal classes with careful, physio-led progression.",
     plans: ["Personal classes only · tailored to your assessment"],
     image: "1599901860904-17e6ed7083a0",
+    imageUrl: "/sessions/clinical.jpg",
   },
   {
     slug: "prenatal-postnatal",
@@ -161,6 +162,7 @@ export const sessions = [
     copy: "Safe, adapted Pilates through pregnancy and after — strength, posture and controlled movement, respecting each stage. Delivered as personal classes.",
     plans: ["Personal classes only · tailored to each trimester and stage"],
     image: "1552196563-55cd4e45efb3",
+    imageUrl: "/sessions/prenatal-postnatal.jpg",
   },
 ] as const;
 
