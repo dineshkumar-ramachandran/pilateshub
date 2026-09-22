@@ -180,7 +180,10 @@ const APPARATUS_ALL = [
 
 // Real, in-studio photography — same set used across all three
 // per-location pages (Overview / Amenities / Book).
+// reception.jpg is the branded reception shot (PILATES HUB logo wall) —
+// used first so it's what shows on the homepage and hero.
 export const LOCATION_GALLERY = [
+  "/locations/reception.jpg",
   "/locations/1.jpg",
   "/locations/2.jpg",
   "/locations/3.jpg",
