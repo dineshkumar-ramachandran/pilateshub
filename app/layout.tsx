@@ -70,10 +70,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <body className="min-h-full">
         <Nav />
-        <SmoothScroll>
-          <main id="main">{children}</main>
-          <Footer />
-        </SmoothScroll>
+        <main id="main">{children}</main>
+        <Footer />
       </body>
     </html>
   );
