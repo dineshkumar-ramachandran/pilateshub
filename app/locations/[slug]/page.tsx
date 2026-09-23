@@ -13,6 +13,7 @@ import { TrustBadges } from "@/components/locations/TrustBadges";
 import { AmenityIcon } from "@/components/locations/AmenityIcon";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { LinkButton } from "@/components/ui/Button";
+import { Icon } from "@/components/ui/Icon";
 import { Reveal } from "@/components/motion/Reveal";
 import Link from "next/link";
 
@@ -66,24 +67,45 @@ export default async function LocationOverview({ params }: { params: Promise<Par
         <div className="container-page grid gap-14 md:grid-cols-12">
           <div className="md:col-span-5">
             <SectionLabel>Visit</SectionLabel>
-            <p className="mt-6 max-w-sm text-[length:var(--text-lead)] leading-relaxed text-cream">
-              {loc.address}
+            <p className="mt-6 flex max-w-sm items-start gap-3 text-[length:var(--text-lead)] leading-relaxed text-cream">
+              <Icon name="pin" className="mt-1 h-5 w-5 shrink-0 text-gold" />
+              <span>{loc.address}</span>
             </p>
 
             <ul className="mt-8 space-y-3 text-sm">
-              <li>
+              <li className="flex items-center gap-3">
+                <Icon name="phone" className="h-4 w-4 text-gold" />
                 <a href={`tel:${loc.phoneRaw}`} className="link-underline text-cream">
                   {loc.phone}
                 </a>
               </li>
+              <li className="flex items-center gap-3">
+                <Icon name="mail" className="h-4 w-4 text-gold" />
+                <a href={`mailto:${loc.email}`} className="link-underline text-cream">
+                  {loc.email}
+                </a>
+              </li>
+              <li className="flex items-center gap-3">
+                <Icon name="instagram" className="h-4 w-4 text-gold" />
+                <a
+                  href={loc.instagram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="link-underline text-cream"
+                >
+                  {loc.instagramHandle}
+                </a>
+              </li>
             </ul>
 
-            <dl className="mt-8 space-y-1 text-sm text-cream/80">
+            <dl className="mt-8 space-y-2 text-sm text-cream/80">
               {loc.hours.map((h) => (
-                <div key={h.days} className="flex gap-3">
+                <div key={h.days} className="flex items-center gap-3">
+                  <Icon name="calendar" className="h-4 w-4 shrink-0 text-gold" />
                   <dt className="w-28 font-mono text-[0.7rem] uppercase tracking-[0.2em] text-cream/50">
                     {h.days}
                   </dt>
+                  <Icon name="clock" className="h-4 w-4 shrink-0 text-gold/80" />
                   <dd>{h.time}</dd>
                 </div>
               ))}

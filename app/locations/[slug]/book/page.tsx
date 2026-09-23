@@ -5,14 +5,13 @@ import {
   sessions,
   amenitiesFor,
   BOOKING_POLICY,
-  site,
   whatsappUrl,
-  mailtoUrl,
 } from "@/lib/content";
 import { LocationHeader } from "@/components/locations/LocationHeader";
 import { LocationGallery } from "@/components/locations/LocationGallery";
 import { AmenityIcon } from "@/components/locations/AmenityIcon";
 import { TrustBadges } from "@/components/locations/TrustBadges";
+import { Icon } from "@/components/ui/Icon";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { LinkButton } from "@/components/ui/Button";
 import { RevealText } from "@/components/motion/RevealText";
@@ -49,10 +48,11 @@ export default async function BookPage({ params }: { params: Promise<Params> }) 
   const waMessage = whatsappUrl(
     `Hi PilatesHub, I'd like to book a session at ${loc.name}.`,
   );
-  const mailtoLink = mailtoUrl(
+  const mailtoLink = `mailto:${loc.email}?subject=${encodeURIComponent(
     `Booking enquiry — ${loc.name}`,
+  )}&body=${encodeURIComponent(
     `Hi PilatesHub,\n\nI'd like to book a session at your ${loc.name} studio.\n\nMy details:\nName:\nPhone:\nPreferred day/time:\nProgram of interest:\n\nThank you.`,
-  );
+  )}`;
 
   return (
     <>
@@ -80,7 +80,9 @@ export default async function BookPage({ params }: { params: Promise<Params> }) 
       <section className="bg-coal py-14">
         <div className="container-page grid gap-10 md:grid-cols-12">
           <div className="md:col-span-4">
-            <p className="font-mono text-[0.7rem] uppercase tracking-[0.2em] text-cream/50">WhatsApp</p>
+            <p className="flex items-center gap-2 font-mono text-[0.7rem] uppercase tracking-[0.2em] text-cream/50">
+              <Icon name="phone" className="h-3.5 w-3.5 text-gold" /> WhatsApp
+            </p>
             <a
               href={waMessage}
               target="_blank"
@@ -93,7 +95,9 @@ export default async function BookPage({ params }: { params: Promise<Params> }) 
           </div>
 
           <div className="md:col-span-4">
-            <p className="font-mono text-[0.7rem] uppercase tracking-[0.2em] text-cream/50">Call</p>
+            <p className="flex items-center gap-2 font-mono text-[0.7rem] uppercase tracking-[0.2em] text-cream/50">
+              <Icon name="phone" className="h-3.5 w-3.5 text-gold" /> Call
+            </p>
             <a
               href={`tel:${loc.phoneRaw}`}
               className="mt-2 block font-display text-2xl text-cream hover:text-gold"
@@ -104,25 +108,43 @@ export default async function BookPage({ params }: { params: Promise<Params> }) 
           </div>
 
           <div className="md:col-span-4">
-            <p className="font-mono text-[0.7rem] uppercase tracking-[0.2em] text-cream/50">Email</p>
+            <p className="flex items-center gap-2 font-mono text-[0.7rem] uppercase tracking-[0.2em] text-cream/50">
+              <Icon name="mail" className="h-3.5 w-3.5 text-gold" /> Email
+            </p>
             <a
               href={mailtoLink}
               className="mt-2 block font-display text-2xl text-cream hover:text-gold"
             >
-              {site.email}
+              {loc.email}
             </a>
             <p className="mt-2 text-xs text-mist">We reply within 24 hours.</p>
+          </div>
+
+          <div className="md:col-span-6">
+            <p className="flex items-center gap-2 font-mono text-[0.7rem] uppercase tracking-[0.2em] text-cream/50">
+              <Icon name="instagram" className="h-3.5 w-3.5 text-gold" /> Instagram
+            </p>
+            <a
+              href={loc.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-2 block font-display text-2xl text-cream hover:text-gold"
+            >
+              {loc.instagramHandle}
+            </a>
+            <p className="mt-2 text-xs text-mist">Follow the studio for updates and stories.</p>
           </div>
 
           <div className="md:col-span-12">
             <div className="mt-4 grid gap-6 border-t border-line pt-6 md:grid-cols-2">
               <div>
-                <p className="font-mono text-[0.7rem] uppercase tracking-[0.2em] text-cream/50">
-                  Studio hours
+                <p className="flex items-center gap-2 font-mono text-[0.7rem] uppercase tracking-[0.2em] text-cream/50">
+                  <Icon name="calendar" className="h-3.5 w-3.5 text-gold" /> Studio hours
                 </p>
-                <dl className="mt-3 space-y-1 text-sm text-cream">
+                <dl className="mt-3 space-y-2 text-sm text-cream">
                   {loc.hours.map((h) => (
-                    <div key={h.days} className="flex gap-3">
+                    <div key={h.days} className="flex items-center gap-3">
+                      <Icon name="clock" className="h-4 w-4 shrink-0 text-gold/80" />
                       <dt className="w-28 font-mono text-[0.7rem] uppercase tracking-[0.2em] text-cream/50">
                         {h.days}
                       </dt>
@@ -132,8 +154,8 @@ export default async function BookPage({ params }: { params: Promise<Params> }) 
                 </dl>
               </div>
               <div>
-                <p className="font-mono text-[0.7rem] uppercase tracking-[0.2em] text-cream/50">
-                  Address
+                <p className="flex items-center gap-2 font-mono text-[0.7rem] uppercase tracking-[0.2em] text-cream/50">
+                  <Icon name="pin" className="h-3.5 w-3.5 text-gold" /> Address
                 </p>
                 <p className="mt-3 max-w-md text-sm text-cream">{loc.address}</p>
               </div>

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { nav, site, locations, whatsappUrl } from "@/lib/content";
 import NewsletterForm from "@/components/forms/NewsletterForm";
+import { Icon } from "@/components/ui/Icon";
 
 export default function Footer() {
   const active = locations.filter((l) => l.status === "active");
@@ -39,13 +40,31 @@ export default function Footer() {
         {/* Visit */}
         <div className="md:col-span-2">
           <p className="eyebrow mb-5 text-cream/40">Visit</p>
-          <ul className="space-y-4">
+          <ul className="space-y-5">
             {active.map((l) => (
               <li key={l.slug}>
-                <Link href={`/locations/${l.slug}`} className="text-cream/80 hover:text-cream">
+                <Link href={`/locations/${l.slug}`} className="font-medium text-cream/90 hover:text-gold">
                   {l.name}
                 </Link>
-                <p className="mt-1 text-sm text-cream/50">{l.city}</p>
+                <ul className="mt-2 space-y-1.5 text-xs text-cream/60">
+                  <li>
+                    <a href={`tel:${l.phoneRaw}`} className="inline-flex items-center gap-1.5 hover:text-cream">
+                      <Icon name="phone" className="h-3 w-3 text-gold" />
+                      {l.phone}
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href={l.instagram}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 hover:text-cream"
+                    >
+                      <Icon name="instagram" className="h-3 w-3 text-gold" />
+                      {l.instagramHandle}
+                    </a>
+                  </li>
+                </ul>
               </li>
             ))}
           </ul>

@@ -7,6 +7,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { locations } from "@/lib/content";
 import { DUR, EASE } from "@/lib/motion";
 import { SectionLabel } from "@/components/ui/SectionLabel";
+import { Icon } from "@/components/ui/Icon";
 
 export default function LocationsTeaser() {
   const [active, setActive] = useState(0);
@@ -44,22 +45,36 @@ export default function LocationsTeaser() {
                   >
                     {l.name}
                   </button>
-                  <p className="mt-3 max-w-sm text-sm text-mist">{l.address}</p>
+                  <p className="mt-3 flex max-w-sm items-start gap-2 text-sm text-mist">
+                    <Icon name="pin" className="mt-0.5 h-4 w-4 shrink-0 text-gold" />
+                    <span>{l.address}</span>
+                  </p>
 
-                  <dl className="mt-4 grid gap-1 text-xs text-mist">
-                    <div className="flex gap-2">
-                      <dt className="font-mono uppercase tracking-[0.18em] text-cream/60">Call</dt>
-                      <dd>
-                        <a href={`tel:${l.phoneRaw}`} className="link-underline text-cream/90">
-                          {l.phone}
-                        </a>
-                      </dd>
+                  <dl className="mt-4 grid gap-1.5 text-xs text-mist">
+                    <div className="flex items-center gap-2">
+                      <Icon name="phone" className="h-3.5 w-3.5 text-gold" />
+                      <a href={`tel:${l.phoneRaw}`} className="link-underline text-cream/90">
+                        {l.phone}
+                      </a>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Icon name="instagram" className="h-3.5 w-3.5 text-gold" />
+                      <a
+                        href={l.instagram}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="link-underline text-cream/90"
+                      >
+                        {l.instagramHandle}
+                      </a>
                     </div>
                     {l.hours.map((h) => (
-                      <div key={h.days} className="flex gap-2">
+                      <div key={h.days} className="flex items-center gap-2">
+                        <Icon name="calendar" className="h-3.5 w-3.5 text-gold" />
                         <dt className="font-mono uppercase tracking-[0.18em] text-cream/60">
                           {h.days}
                         </dt>
+                        <Icon name="clock" className="h-3.5 w-3.5 text-gold/80" />
                         <dd>{h.time}</dd>
                       </div>
                     ))}
