@@ -1,7 +1,14 @@
+import Image from "next/image";
 import Link from "next/link";
 import { nav, site, locations, whatsappUrl } from "@/lib/content";
 import NewsletterForm from "@/components/forms/NewsletterForm";
 import { Icon } from "@/components/ui/Icon";
+
+/** Rewrite section anchors like "#about" to "/#about" so they work from any
+ *  route, not just the homepage. */
+function footerHref(href: string): string {
+  return href.startsWith("#") ? `/${href}` : href;
+}
 
 export default function Footer() {
   const active = locations.filter((l) => l.status === "active");
@@ -11,8 +18,11 @@ export default function Footer() {
       <div className="container-page grid gap-12 py-16 md:grid-cols-12 md:py-20">
         {/* Brand + statement */}
         <div className="md:col-span-5">
-          <Link href="/" className="font-display text-3xl text-cream">
-            Pilates<span className="text-gold">Hub</span>
+          <Link href="/" className="inline-flex items-center gap-3 font-display text-3xl text-cream">
+            <Image src="/logo.png" alt="" width={56} height={56} className="h-14 w-14" />
+            <span>
+              Pilates<span className="text-gold">Hub</span>
+            </span>
           </Link>
           <p className="mt-5 max-w-xs text-cream/60">
             A studio for deliberate movement in Bengaluru. Strength, control and the
@@ -29,7 +39,7 @@ export default function Footer() {
           <ul className="space-y-3">
             {nav.map((item) => (
               <li key={item.href}>
-                <Link href={item.href} className="link-underline text-cream/80 hover:text-cream">
+                <Link href={footerHref(item.href)} className="link-underline text-cream/80 hover:text-cream">
                   {item.label}
                 </Link>
               </li>

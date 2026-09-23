@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Fraunces, Inter, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { site } from "@/lib/content";
@@ -44,6 +45,7 @@ export const metadata: Metadata = {
     "Pilates classes Bangalore",
   ],
   alternates: { canonical: "/" },
+  manifest: "/site.webmanifest",
   openGraph: {
     type: "website",
     locale: "en_IN",
@@ -68,6 +70,18 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${fraunces.variable} ${inter.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full">
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=AW-18470066209"
+          strategy="afterInteractive"
+        />
+        <Script id="gtag-init" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'AW-18470066209');
+          `}
+        </Script>
         <ScrollProgress />
         <Cursor />
         <Nav />

@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { nav, whatsappUrl } from "@/lib/content";
@@ -53,10 +54,20 @@ export default function Nav() {
         <div className="container-page flex items-center justify-between">
           <a
             href={isHome ? "#top" : "/"}
-            className="font-display text-xl tracking-tight text-cream sm:text-2xl"
+            className="flex items-center gap-2.5 font-display text-xl tracking-tight text-cream sm:text-2xl"
             aria-label="PilatesHub home"
           >
-            Pilates<span className="text-gold">Hub</span>
+            <Image
+              src="/logo.png"
+              alt=""
+              width={40}
+              height={40}
+              priority
+              className="h-9 w-9 sm:h-10 sm:w-10"
+            />
+            <span>
+              Pilates<span className="text-gold">Hub</span>
+            </span>
           </a>
 
           <nav className="hidden items-center gap-8 lg:flex">
