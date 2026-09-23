@@ -79,9 +79,9 @@ export default function Sessions() {
                   </span>
 
                   {/* Inline image on mobile */}
-                  <div className="col-span-2 overflow-hidden rounded-[var(--radius-md)] lg:hidden">
-                    <div className="relative aspect-[16/10]">
-                      <Image src={imgFor(s)} alt={s.title} fill sizes="100vw" className="object-cover" />
+                  <div className="col-span-2 overflow-hidden rounded-[var(--radius-md)] bg-noir lg:hidden">
+                    <div className="relative aspect-[4/5]">
+                      <Image src={imgFor(s)} alt={s.title} fill sizes="100vw" className="object-contain" />
                     </div>
                   </div>
 

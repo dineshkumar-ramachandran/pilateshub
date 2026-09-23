@@ -26,21 +26,28 @@ export default function EquipmentSection() {
           {equipment.map((e, i) => (
             <Reveal key={e.slug} delay={(i % 3) * 0.06}>
               <article className="group">
-                <div className="relative aspect-[4/5] overflow-hidden rounded-[var(--radius-lg)] bg-cream">
-                  <Image
-                    src={e.imageUrl}
-                    alt={e.name}
-                    fill
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    className="object-contain p-6 transition-transform duration-[var(--dur-slow)] ease-[var(--ease-out-soft)] group-hover:scale-105"
-                  />
-                  <span className="absolute left-4 top-4 rounded-[var(--radius-pill)] bg-noir/85 px-2.5 py-1 font-mono text-[0.65rem] uppercase tracking-[0.16em] text-gold backdrop-blur">
-                    0{i + 1}
-                  </span>
-                </div>
-                <h3 className="mt-5 font-display text-[length:var(--text-h2)] text-cream">
-                  {e.name}
-                </h3>
+                <a
+                  href={`https://pilates-hub.com/${e.slug}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block"
+                >
+                  <div className="relative aspect-[4/5] overflow-hidden rounded-[var(--radius-lg)] bg-cream">
+                    <Image
+                      src={e.imageUrl}
+                      alt={e.name}
+                      fill
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      className="object-contain p-6 transition-transform duration-[var(--dur-slow)] ease-[var(--ease-out-soft)] group-hover:scale-105"
+                    />
+                    <span className="absolute left-4 top-4 rounded-[var(--radius-pill)] bg-noir/85 px-2.5 py-1 font-mono text-[0.65rem] uppercase tracking-[0.16em] text-gold backdrop-blur">
+                      0{i + 1}
+                    </span>
+                  </div>
+                  <h3 className="mt-5 font-display text-[length:var(--text-h2)] text-cream transition-colors group-hover:text-gold">
+                    {e.name}
+                  </h3>
+                </a>
                 <p className="mt-2 text-gold">{e.short}</p>
                 <p className="mt-3 text-sm leading-relaxed text-mist">{e.copy}</p>
               </article>

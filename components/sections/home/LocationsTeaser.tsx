@@ -90,7 +90,7 @@ export default function LocationsTeaser() {
                     </Link>
                     <Link
                       href={`/locations/${l.slug}`}
-                      className="link-underline text-cream/85"
+                      className="link-underline text-gold"
                     >
                       Take a look →
                     </Link>

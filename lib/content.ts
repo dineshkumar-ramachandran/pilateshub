@@ -192,7 +192,6 @@ export const GALLERY_HSR = [
   "/locations/hsr/4.jpg",
   "/locations/hsr/5.jpg",
   "/locations/hsr/6.jpg",
-  "/locations/hsr/7.jpg",
 ] as const;
 export const GALLERY_BELLANDUR = [
   "/locations/bellandur/1.jpg",
@@ -210,7 +209,6 @@ export const GALLERY_KORAMANGALA = [
   "/locations/koramangala/4.jpg",
   "/locations/koramangala/5.jpg",
   "/locations/koramangala/6.jpg",
-  "/locations/koramangala/7.jpg",
 ] as const;
 
 // Every amenity we offer. `showersAt` lists the branches where the

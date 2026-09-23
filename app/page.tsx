@@ -9,7 +9,6 @@ import EquipmentSection from "@/components/sections/home/EquipmentSection";
 import Founders from "@/components/sections/home/Founders";
 import Trainees from "@/components/sections/home/Trainees";
 import FaqSection from "@/components/sections/home/FaqSection";
-import InstagramStrip from "@/components/sections/home/InstagramStrip";
 import ContactSection from "@/components/sections/home/ContactSection";
 import FinalCta from "@/components/sections/home/FinalCta";
 import { JsonLd, localBusinessSchema, faqSchema } from "@/lib/schema";
@@ -65,8 +64,6 @@ export default function HomePage() {
       <Anchor id="faq">
         <FaqSection />
       </Anchor>
-
-      <InstagramStrip />
 
       <Anchor id="contact">
         <ContactSection />
