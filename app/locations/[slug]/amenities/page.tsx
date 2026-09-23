@@ -66,26 +66,11 @@ export default async function AmenitiesPage({ params }: { params: Promise<Params
       <section className="bg-coal py-16 md:py-20">
         <div className="container-page">
           <p className="font-mono text-[0.72rem] uppercase tracking-[0.22em] text-gold">
-            {amenities.length} of 7 amenities available at this branch
+            {amenities.length} amenities available at this branch
           </p>
           <div className="mt-8">
             <AmenitiesGrid activeKeys={loc.amenityKeys} />
           </div>
-
-          {/* Explicit note for HSR (no showers) */}
-          {!(loc.amenityKeys as readonly string[]).includes("showers") && (
-            <p className="mt-8 max-w-2xl text-sm text-mist">
-              Showers are available at our Bellandur and Koramangala branches.
-              {" "}
-              <Link href="/locations/bellandur/amenities" className="link-underline text-cream">
-                Bellandur
-              </Link>{" "}
-              ·{" "}
-              <Link href="/locations/koramangala/amenities" className="link-underline text-cream">
-                Koramangala
-              </Link>
-            </p>
-          )}
         </div>
       </section>
 

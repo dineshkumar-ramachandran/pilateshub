@@ -134,6 +134,7 @@ export const sessions = [
       "2 days / week · 8-session pack · 1-month validity",
     ],
     image: "1571902943202-507ec2618e8f",
+    imageUrl: "/sessions/group.jpg",
   },
   {
     slug: "personal",
@@ -145,6 +146,7 @@ export const sessions = [
       "2 days / week · 8-session pack · 1-month validity",
     ],
     image: "1518611012118-696072aa579a",
+    imageUrl: "/sessions/personal.jpg",
   },
   {
     slug: "clinical",
@@ -180,19 +182,35 @@ const APPARATUS_ALL = [
   "Pilates accessories",
 ] as const;
 
-// Real, in-studio photography — same set used across all three
-// per-location pages (Overview / Amenities / Book).
-// reception.jpg is the branded reception shot (PILATES HUB logo wall) —
-// used first so it's what shows on the homepage and hero.
-export const LOCATION_GALLERY = [
-  "/locations/reception.jpg",
-  "/locations/1.jpg",
-  "/locations/2.jpg",
-  "/locations/3.jpg",
-  "/locations/4.jpg",
-  "/locations/5.jpg",
-  "/locations/6.jpg",
-  "/locations/7.jpg",
+// Real, in-studio photography — one set per branch, seven photos each,
+// used identically across the Overview / Amenities / Book pages of that
+// branch. The homepage LocationsTeaser uses `homeImage` per location.
+export const GALLERY_HSR = [
+  "/locations/hsr/1.jpg",
+  "/locations/hsr/2.jpg",
+  "/locations/hsr/3.jpg",
+  "/locations/hsr/4.jpg",
+  "/locations/hsr/5.jpg",
+  "/locations/hsr/6.jpg",
+  "/locations/hsr/7.jpg",
+] as const;
+export const GALLERY_BELLANDUR = [
+  "/locations/bellandur/1.jpg",
+  "/locations/bellandur/2.jpg",
+  "/locations/bellandur/3.jpg",
+  "/locations/bellandur/4.jpg",
+  "/locations/bellandur/5.jpg",
+  "/locations/bellandur/6.jpg",
+  "/locations/bellandur/7.jpg",
+] as const;
+export const GALLERY_KORAMANGALA = [
+  "/locations/koramangala/1.jpg",
+  "/locations/koramangala/2.jpg",
+  "/locations/koramangala/3.jpg",
+  "/locations/koramangala/4.jpg",
+  "/locations/koramangala/5.jpg",
+  "/locations/koramangala/6.jpg",
+  "/locations/koramangala/7.jpg",
 ] as const;
 
 // Every amenity we offer. `showersAt` lists the branches where the
@@ -237,7 +255,8 @@ export const locations = [
     hours: UNIFIED_HOURS,
     apparatus: APPARATUS_ALL,
     amenityKeys: ["parking", "lockers", "changing", "ac", "refreshments", "wifi"] as const,
-    gallery: LOCATION_GALLERY,
+    gallery: GALLERY_HSR,
+    homeImage: "/locations/hsr-home.jpg",
     mapsQuery:
       "PilatesHub, 2577, 13th Cross, 27th Main Rd, HSR Layout, Bengaluru 560102",
     geo: { lat: 12.9121, lng: 77.6446 },
@@ -255,7 +274,8 @@ export const locations = [
     hours: UNIFIED_HOURS,
     apparatus: APPARATUS_ALL,
     amenityKeys: ["parking", "lockers", "changing", "ac", "refreshments", "wifi", "showers"] as const,
-    gallery: LOCATION_GALLERY,
+    gallery: GALLERY_BELLANDUR,
+    homeImage: "/locations/bellandur-home.jpg",
     mapsQuery:
       "PilatesHub, Bhupal Reddy Building, Gear School Rd, Bellandur, Bengaluru 560103",
     geo: null,
@@ -273,7 +293,8 @@ export const locations = [
     hours: UNIFIED_HOURS,
     apparatus: APPARATUS_ALL,
     amenityKeys: ["parking", "lockers", "changing", "ac", "refreshments", "wifi", "showers"] as const,
-    gallery: LOCATION_GALLERY,
+    gallery: GALLERY_KORAMANGALA,
+    homeImage: "/locations/koramangala-home.jpg",
     mapsQuery:
       "PilatesHub, SR Complex, Tavarekere Main Rd, S.G. Palya, Bengaluru 560029",
     geo: null,

@@ -3,14 +3,13 @@
 import { useState } from "react";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
-import { sessions, img } from "@/lib/content";
-
-/** Prefer a session's real photo (/public/sessions/*.jpg) when it has one;
- *  fall back to the Unsplash placeholder for sessions that don't yet. */
-type Session = (typeof sessions)[number];
-const imgFor = (s: Session, w: number, q = 72) =>
-  "imageUrl" in s && s.imageUrl ? s.imageUrl : img(s.image, w, q);
+import { sessions } from "@/lib/content";
 import { DUR, EASE } from "@/lib/motion";
+
+/** All four sessions now ship with a real studio photo; keep a helper so
+ *  future sessions can be added with just an `imageUrl`. */
+type Session = (typeof sessions)[number];
+const imgFor = (s: Session) => s.imageUrl;
 import { SectionLabel } from "@/components/ui/SectionLabel";
 
 export default function Sessions() {
@@ -48,7 +47,7 @@ export default function Sessions() {
                   transition={{ duration: DUR.standard, ease: EASE.outSoft }}
                 >
                   <Image
-                    src={imgFor(sessions[shown], 1000)}
+                    src={imgFor(sessions[shown])}
                     alt={sessions[shown].title}
                     fill
                     sizes="40vw"
@@ -82,7 +81,7 @@ export default function Sessions() {
                   {/* Inline image on mobile */}
                   <div className="col-span-2 overflow-hidden rounded-[var(--radius-md)] lg:hidden">
                     <div className="relative aspect-[16/10]">
-                      <Image src={imgFor(s, 800, 70)} alt={s.title} fill sizes="100vw" className="object-cover" />
+                      <Image src={imgFor(s)} alt={s.title} fill sizes="100vw" className="object-cover" />
                     </div>
                   </div>
 

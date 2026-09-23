@@ -97,7 +97,7 @@ export default function LocationsTeaser() {
                 transition={{ duration: DUR.standard, ease: EASE.outSoft }}
               >
                 <Image
-                  src={current.gallery[0]}
+                  src={current.homeImage}
                   alt={`${current.name} studio`}
                   fill
                   sizes="(max-width: 768px) 100vw, 45vw"

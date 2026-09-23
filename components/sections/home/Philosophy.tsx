@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { philosophy, img, poses } from "@/lib/content";
+import { philosophy, poses } from "@/lib/content";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { Reveal } from "@/components/motion/Reveal";
 import { RevealText } from "@/components/motion/RevealText";
@@ -64,8 +64,8 @@ export default function Philosophy() {
             <FadeIn scale={1.06} y={0} duration={1.2}>
               <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[var(--radius-lg)] bg-ash">
                 <Image
-                  src={img(philosophy.image, 1400, 74)}
-                  alt="Instructor guiding a client through a controlled reformer exercise"
+                  src="/philosophy.jpg"
+                  alt="PilatesHub studio philosophy"
                   fill
                   sizes="(max-width: 768px) 100vw, 55vw"
                   className="object-cover"
