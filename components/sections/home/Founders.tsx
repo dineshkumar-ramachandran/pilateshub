@@ -77,7 +77,7 @@ export default function Founders() {
                   alt={`${founders.fullNames}, founders of PilatesHub`}
                   fill
                   sizes="(max-width: 768px) 100vw, 50vw"
-                  className="object-cover"
+                  className="object-cover object-[center_top] scale-[1.18] origin-top"
                 />
               </div>
             </FadeIn>

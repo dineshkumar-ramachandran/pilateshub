@@ -53,12 +53,12 @@ export default function HomePage() {
         <LocationsTeaser />
       </Anchor>
 
-      <Anchor id="equipment">
-        <EquipmentSection />
-      </Anchor>
-
       <Anchor id="trainees">
         <Trainees />
+      </Anchor>
+
+      <Anchor id="equipment">
+        <EquipmentSection />
       </Anchor>
 
       <Anchor id="faq">

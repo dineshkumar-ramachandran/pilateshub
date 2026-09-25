@@ -80,7 +80,6 @@ function DesktopHero() {
       onMouseMove={onMove}
       className="relative bg-noir"
       style={{ height: `${N * 100}svh`, minHeight: `${N * 640}px` }}
-      data-cursor="scroll"
     >
       <div className="sticky top-0 h-svh min-h-[640px] w-full overflow-hidden pt-20">
         <div className="container-page grid h-full w-full grid-cols-12 gap-8 pb-8">

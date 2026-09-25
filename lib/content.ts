@@ -445,7 +445,7 @@ export const founders = {
     "It started with a single studio in HSR Layout, Bengaluru, and has since expanded across the city to Bellandur and Koramangala. The practice now extends further through Pilates equipment sales and teacher training.",
     "More than a thousand clients have trained with us since we opened — a community built one careful session at a time.",
   ],
-  image: "/studio/founders.webp",
+  image: "/studio/founders.jpg",
 } as const;
 
 /* ----------------------------- Movement progression ----------------------- */

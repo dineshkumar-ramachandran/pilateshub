@@ -10,7 +10,7 @@ export default function EquipmentSection() {
       <div className="container-page">
         <div className="mb-14 flex flex-col justify-between gap-6 md:flex-row md:items-end">
           <div>
-            <SectionLabel index="06">The apparatus</SectionLabel>
+            <SectionLabel index="07">The apparatus</SectionLabel>
             <h2 className="mt-6 max-w-xl font-display text-[length:var(--text-h1)] text-cream">
               Classical equipment,{" "}
               <span className="italic text-gold">precisely</span> maintained.

@@ -36,15 +36,17 @@ export default function LocationsTeaser() {
                   onMouseEnter={() => setActive(i)}
                   className="group block w-full border-t border-line py-8 text-left last:border-b"
                 >
-                  <button
-                    onClick={() => setActive(i)}
-                    aria-pressed={isActive}
-                    className={`font-display text-[length:var(--text-h2)] leading-none transition-colors ${
+                  <Link
+                    href={`/locations/${l.slug}`}
+                    onMouseEnter={() => setActive(i)}
+                    onFocus={() => setActive(i)}
+                    aria-current={isActive ? "true" : undefined}
+                    className={`block font-display text-[length:var(--text-h2)] leading-none transition-colors ${
                       isActive ? "text-cream" : "text-cream/40 group-hover:text-cream/70"
                     }`}
                   >
                     {l.name}
-                  </button>
+                  </Link>
                   <p className="mt-3 flex max-w-sm items-start gap-2 text-sm text-mist">
                     <Icon name="pin" className="mt-0.5 h-4 w-4 shrink-0 text-gold" />
                     <span>{l.address}</span>

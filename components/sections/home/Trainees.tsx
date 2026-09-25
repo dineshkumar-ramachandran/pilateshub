@@ -35,7 +35,7 @@ export default function Trainees() {
   return (
     <section ref={ref} className="relative overflow-hidden bg-noir py-24 md:py-32">
       <div className="container-page">
-        <SectionLabel index="07">A word from our trainees</SectionLabel>
+        <SectionLabel index="06">A word from our trainees</SectionLabel>
 
         <p className="mt-6 max-w-xl font-mono text-[0.7rem] uppercase tracking-[0.28em] text-gold">
           {site.clientsTrained.toLocaleString()}+ clients trained across Bengaluru
