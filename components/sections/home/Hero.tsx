@@ -243,7 +243,7 @@ function MobileHero() {
               animate={{ opacity: i === idx ? 1 : 0 }}
               transition={{ duration: 1.2, ease: EASE.outSoft }}
             >
-              <Image
+              <Image quality={90}
                 src={img(id, 1400, 72)}
                 alt={`PilatesHub studio, photo ${i + 1}`}
                 fill
@@ -365,7 +365,7 @@ function SequenceFrame({
 
   return (
     <motion.div style={{ opacity, scale, y: parY }} className="absolute inset-0">
-      <Image
+      <Image quality={90}
         src={src}
         alt={alt}
         fill

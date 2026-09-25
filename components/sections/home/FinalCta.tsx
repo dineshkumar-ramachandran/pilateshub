@@ -13,7 +13,7 @@ export default function FinalCta() {
         className="absolute inset-0 -z-10"
         strength={22}
       />
-      <div className="absolute inset-0 -z-10 bg-ink/55" />
+      <div className="absolute inset-0 -z-10 bg-gradient-to-r from-noir/95 via-noir/70 to-noir/0 md:via-noir/55" />
 
       <div className="container-page py-28">
         <RevealText

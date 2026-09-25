@@ -46,7 +46,7 @@ export default function Sessions() {
                   exit={{ opacity: 0 }}
                   transition={{ duration: DUR.standard, ease: EASE.outSoft }}
                 >
-                  <Image
+                  <Image quality={90}
                     src={imgFor(sessions[shown])}
                     alt={sessions[shown].title}
                     fill
@@ -81,7 +81,7 @@ export default function Sessions() {
                   {/* Inline image on mobile */}
                   <div className="col-span-2 overflow-hidden rounded-[var(--radius-md)] bg-noir lg:hidden">
                     <div className="relative aspect-[4/5]">
-                      <Image src={imgFor(s)} alt={s.title} fill sizes="100vw" className="object-contain" />
+                      <Image quality={90} src={imgFor(s)} alt={s.title} fill sizes="100vw" className="object-contain" />
                     </div>
                   </div>
 

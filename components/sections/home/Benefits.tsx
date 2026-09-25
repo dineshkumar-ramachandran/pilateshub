@@ -72,7 +72,7 @@ export default function Benefits() {
                   exit={{ opacity: 0 }}
                   transition={{ duration: DUR.standard, ease: EASE.outSoft }}
                 >
-                  <Image
+                  <Image quality={90}
                     src={img(current.image, 900, 72)}
                     alt={current.title}
                     fill
@@ -96,7 +96,7 @@ export default function Benefits() {
               key={b.title}
               className="relative aspect-[3/4] w-[74%] shrink-0 snap-center overflow-hidden rounded-[var(--radius-lg)] bg-ash"
             >
-              <Image src={img(b.image, 700, 70)} alt={b.title} fill sizes="74vw" className="object-cover" />
+              <Image quality={90} src={img(b.image, 700, 70)} alt={b.title} fill sizes="74vw" className="object-cover" />
               <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/70 to-transparent p-5">
                 <span className="font-mono text-xs text-cream/70">{b.n}</span>
                 <p className="font-display text-2xl text-cream">{b.title}</p>

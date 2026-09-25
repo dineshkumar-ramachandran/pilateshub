@@ -60,7 +60,7 @@ export default function ParallaxImage({
       className={`relative overflow-hidden ${rounded ? "rounded-[var(--radius-lg)]" : ""} ${className ?? ""}`}
     >
       <div ref={inner} className="absolute inset-0" style={{ scale: reduced ? 1 : 1.15 }}>
-        <Image
+        <Image quality={90}
           src={src}
           alt={alt}
           fill

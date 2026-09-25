@@ -72,7 +72,7 @@ export default function Founders() {
           <motion.div style={{ y: portraitY }} className="relative">
             <FadeIn scale={1.06} y={0} duration={1.2}>
               <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[var(--radius-lg)] bg-ash">
-                <Image
+                <Image quality={90}
                   src={img(founders.image, 1200, 74)}
                   alt={`${founders.fullNames}, founders of PilatesHub`}
                   fill

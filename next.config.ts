@@ -15,6 +15,8 @@ const nextConfig: NextConfig = {
       },
     ],
     formats: ["image/avif", "image/webp"],
+    // Next 16 only allows quality 75 by default; 90 is used for large studio photos.
+    qualities: [75, 90],
     // Cap the widest breakpoint at 1920 — our source photos are 2000w
     // after resizing, so requests for 2048/3840 make Vercel bail on
     // optimization and return the source with `content-disposition:

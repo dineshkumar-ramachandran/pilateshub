@@ -111,7 +111,7 @@ export default function LocationsTeaser() {
                 exit={{ opacity: 0 }}
                 transition={{ duration: DUR.standard, ease: EASE.outSoft }}
               >
-                <Image
+                <Image quality={90}
                   src={current.homeImage}
                   alt={`${current.name} studio`}
                   fill

@@ -135,7 +135,7 @@ export const sessions = [
       "2 days / week · 8-session pack · 1-month validity",
     ],
     image: "/studio/group.webp",
-    imageUrl: "/sessions/group.jpg",
+    imageUrl: "/studio/session-group.webp",
   },
   {
     slug: "personal",
@@ -147,7 +147,7 @@ export const sessions = [
       "2 days / week · 8-session pack · 1-month validity",
     ],
     image: "/studio/personal.webp",
-    imageUrl: "/sessions/personal.jpg",
+    imageUrl: "/studio/session-personal.webp",
   },
   {
     slug: "clinical",

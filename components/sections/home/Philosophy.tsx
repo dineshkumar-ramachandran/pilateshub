@@ -63,8 +63,8 @@ export default function Philosophy() {
           <motion.div style={{ y: imgY }}>
             <FadeIn scale={1.06} y={0} duration={1.2}>
               <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[var(--radius-lg)] bg-ash">
-                <Image
-                  src="/philosophy.jpg"
+                <Image quality={90}
+                  src="/studio/philosophy-portrait.webp"
                   alt="PilatesHub studio philosophy"
                   fill
                   sizes="(max-width: 768px) 100vw, 55vw"
@@ -86,7 +86,7 @@ export default function Philosophy() {
                 className="group flex items-center gap-3 border-t border-cream/12 pt-3"
               >
                 <span className="relative grid h-8 w-8 shrink-0 place-items-center text-gold transition-transform group-hover:scale-110">
-                  <Image src={p.pose} alt="" width={32} height={32} className="h-full w-full" />
+                  <Image quality={90} src={p.pose} alt="" width={32} height={32} className="h-full w-full" />
                 </span>
                 <span className="font-mono text-[0.72rem] uppercase tracking-[0.22em] text-cream">
                   {p.label}
