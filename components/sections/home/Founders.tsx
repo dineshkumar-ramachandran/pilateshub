@@ -71,13 +71,14 @@ export default function Founders() {
         <div className="md:col-span-6">
           <motion.div style={{ y: portraitY }} className="relative">
             <FadeIn scale={1.06} y={0} duration={1.2}>
-              <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[var(--radius-lg)] bg-ash">
-                <Image quality={90}
-                  src={img(founders.image, 1200, 74)}
+              <div className="relative aspect-[3/4] w-full overflow-hidden rounded-[var(--radius-lg)] bg-ash">
+                <Image
+                  quality={92}
+                  src={founders.image}
                   alt={`${founders.fullNames}, founders of PilatesHub`}
                   fill
                   sizes="(max-width: 768px) 100vw, 50vw"
-                  className="object-cover object-[center_top] scale-[1.18] origin-top"
+                  className="object-cover object-center"
                 />
               </div>
             </FadeIn>
