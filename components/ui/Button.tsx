@@ -14,7 +14,7 @@ const base =
   "group inline-flex items-center justify-center gap-2 rounded-[var(--radius-pill)] px-7 py-3.5 text-sm tracking-wide transition-colors duration-[var(--dur-fast)] ease-[var(--ease-out-soft)] font-medium";
 
 const variants: Record<Variant, string> = {
-  solid: "bg-gold text-noir hover:bg-gold-bright",
+  solid: "bg-gradient-to-b from-[#f3d67f] to-[#dcae3a] text-cream shadow-[0_10px_24px_-12px_rgba(169,131,42,0.7)] hover:from-[#f6dd92] hover:to-[#e4b94a]",
   outline: "border border-gold/40 text-cream hover:border-gold hover:bg-gold hover:text-noir",
   ghost: "text-cream hover:text-gold",
 };

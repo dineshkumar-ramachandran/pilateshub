@@ -41,7 +41,7 @@ export default async function EquipmentDetail({ params }: { params: Promise<Para
       <section className="bg-noir pb-20 pt-36 md:pt-44">
         <div className="container-page grid gap-14 md:grid-cols-12 md:gap-12">
           <div className="md:col-span-6">
-            <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[var(--radius-lg)] bg-cream">
+            <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[var(--radius-lg)] bg-white ring-1 ring-inset ring-line">
               <Image
                 src={item.imageUrl}
                 alt={item.name}

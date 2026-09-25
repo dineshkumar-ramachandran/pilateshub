@@ -222,36 +222,8 @@ function MobileHero() {
   }, [N]);
 
   return (
-    <section className="relative min-h-[100svh] overflow-hidden bg-noir pt-24 isolate">
-      {/* Auto-cycling full-bleed background.
-          `isolate` on the section creates a stacking context so `z-0` children
-          paint ABOVE the section's bg-noir background (without `isolate`,
-          negative z-index children fall behind the parent's background — the
-          bug that hid the mobile hero images). */}
-      <div className="absolute inset-0 z-0">
-        {hero.sequence.map((id, i) => (
-          <motion.div
-            key={id + i}
-            className="absolute inset-0"
-            initial={false}
-            animate={{ opacity: i === idx ? 1 : 0 }}
-            transition={{ duration: 1.2, ease: EASE.outSoft }}
-          >
-            <Image
-              src={img(id, 1400, 72)}
-              alt={`Pilates practitioner, pose ${i + 1}`}
-              fill
-              priority={i === 0}
-              sizes="100vw"
-              className="object-cover"
-            />
-          </motion.div>
-        ))}
-        {/* Legible-copy scrim */}
-        <div className="absolute inset-0 bg-gradient-to-t from-noir via-noir/70 to-noir/40" />
-      </div>
-
-      <div className="container-page relative z-10 flex min-h-[calc(100svh-6rem)] flex-col justify-between pb-10">
+    <section className="relative overflow-hidden bg-noir pb-10 pt-24">
+      <div className="container-page">
         <motion.span
           className="eyebrow text-gold"
           initial={{ opacity: 0, y: 16 }}
@@ -261,7 +233,29 @@ function MobileHero() {
           {hero.kicker}
         </motion.span>
 
-        <div>
+        {/* Studio photo card — shown clean, no veil, so the real studio is visible. */}
+        <div className="relative mt-5 aspect-[4/3] overflow-hidden rounded-[var(--radius-lg)] bg-ash shadow-[var(--shadow-soft)]">
+          {hero.sequence.map((id, i) => (
+            <motion.div
+              key={id + i}
+              className="absolute inset-0"
+              initial={false}
+              animate={{ opacity: i === idx ? 1 : 0 }}
+              transition={{ duration: 1.2, ease: EASE.outSoft }}
+            >
+              <Image
+                src={img(id, 1400, 72)}
+                alt={`PilatesHub studio, photo ${i + 1}`}
+                fill
+                priority={i === 0}
+                sizes="100vw"
+                className="object-cover"
+              />
+            </motion.div>
+          ))}
+        </div>
+
+        <div className="mt-8">
           <h1
             className="font-display text-cream"
             style={{ fontSize: "var(--text-hero)", lineHeight: 0.95, paddingBottom: "0.12em" }}

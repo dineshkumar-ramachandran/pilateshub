@@ -1,31 +1,31 @@
 @import "tailwindcss";
 
 /* ============================================================
-   PilatesHub — Design System · BLACK + GOLD
-   Brand: near-black grounds, warm gold accent (from pilateshub.in),
-   warm-white type. Editorial, premium, calm.
+   PilatesHub — Design System · WHITE + GOLD
+   Brand: warm white grounds, gold accent (from pilateshub.in), deep ink type.
+   Token names are historical: "noir" = page ground, "cream" = primary text.
    ============================================================ */
 
 @theme {
-  /* ---- Surfaces (dark) ---- */
-  --color-noir: #0b0a07; /* page ground */
-  --color-ink: #121009; /* dark elevated surface / chips */
-  --color-coal: #16130c; /* alt section */
-  --color-ash: #1e1a11; /* warm alt section */
+  /* ---- Surfaces (light) ---- */
+  --color-noir: #fdfbf7; /* page ground (warm white) */
+  --color-ink: #f6f1e7; /* elevated surface / chips */
+  --color-coal: #f8f4ec; /* alt section */
+  --color-ash: #f3ecdf; /* warm alt section */
 
-  /* ---- Type on dark ---- */
-  --color-cream: #f4ecda; /* primary text (warm white) */
-  --color-mist: #b9ad93; /* muted body text */
-  --color-haze: #8a7f66; /* faint / micro */
+  /* ---- Type on light ---- */
+  --color-cream: #1f1a12; /* primary text (deep ink) */
+  --color-mist: #5f5646; /* muted body text */
+  --color-haze: #7d7159; /* faint / micro */
 
   /* ---- Gold accent ---- */
-  --color-gold: #e8c65c; /* primary gold */
-  --color-gold-bright: #ffde5f; /* brand highlight */
-  --color-gold-deep: #b8923a; /* hover / pressed */
+  --color-gold: #a9832a; /* primary gold (readable on white) */
+  --color-gold-bright: #e8c65c; /* brand highlight */
+  --color-gold-deep: #8a6a1f; /* hover / pressed */
 
   /* ---- Lines ---- */
-  --color-line: rgba(244, 236, 218, 0.14);
-  --color-line-soft: rgba(244, 236, 218, 0.07);
+  --color-line: rgba(31, 26, 18, 0.14);
+  --color-line-soft: rgba(31, 26, 18, 0.07);
 
   /* ---- Type ---- */
   --font-display: var(--font-fraunces), "Times New Roman", serif;
@@ -46,7 +46,7 @@
   --radius-lg: 14px;
   --radius-pill: 999px;
 
-  --shadow-soft: 0 24px 60px -24px rgba(0, 0, 0, 0.7);
+  --shadow-soft: 0 24px 60px -28px rgba(80, 60, 20, 0.28);
   --container-page: 1440px;
 
   /* ---- Motion tokens ---- */
@@ -59,7 +59,7 @@
 }
 
 :root {
-  color-scheme: dark;
+  color-scheme: light;
 }
 
 * {
@@ -84,8 +84,8 @@ body {
 }
 
 ::selection {
-  background: var(--color-gold);
-  color: var(--color-noir);
+  background: var(--color-gold-bright);
+  color: var(--color-cream);
 }
 
 h1, h2, h3, h4 {
@@ -136,7 +136,7 @@ h1, h2, h3, h4 {
 
   /* Gold gradient text for select display accents */
   .text-gold-gradient {
-    background: linear-gradient(100deg, var(--color-gold-bright), var(--color-gold-deep));
+    background: linear-gradient(100deg, var(--color-gold), var(--color-gold-deep));
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;

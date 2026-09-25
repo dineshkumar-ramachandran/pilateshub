@@ -6,7 +6,7 @@ import { gsap, ScrollTrigger } from "@/lib/gsap";
 import { usePrefersReducedMotion } from "@/lib/useReducedMotion";
 
 // Deep, warm near-blacks that shift subtly beneath the gold word.
-const TINTS = ["#0b0a07", "#14100a", "#1a140c", "#120f09", "#0a0906"];
+const TINTS = ["#fdfbf7", "#f8f2e6", "#f5eddd", "#f9f4ea", "#fdfbf7"];
 
 export default function ScrollStory() {
   const root = useRef<HTMLDivElement>(null);

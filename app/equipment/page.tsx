@@ -26,7 +26,7 @@ export default function EquipmentPage() {
           {equipment.map((e) => (
             <Reveal key={e.slug}>
               <Link href={`/equipment/${e.slug}`} className="group block" data-cursor="view">
-                <div className="relative aspect-[4/5] overflow-hidden rounded-[var(--radius-lg)] bg-cream">
+                <div className="relative aspect-[4/5] overflow-hidden rounded-[var(--radius-lg)] bg-white ring-1 ring-inset ring-line">
                   <Image
                     src={e.imageUrl}
                     alt={e.name}

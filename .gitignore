@@ -34,3 +34,6 @@ CLAUDE.md
 
 # source videos already copied into /public/trainees
 /videos/
+
+# client source media (multi-GB); optimized copies live in /public/studio
+/images/new-images/

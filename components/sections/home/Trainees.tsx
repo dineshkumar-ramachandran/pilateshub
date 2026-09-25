@@ -154,6 +154,7 @@ function VideoTile({
       <video
         ref={vidRef}
         src={src}
+        poster={src.replace(/\.webm$/, ".jpg")}
         muted
         loop
         playsInline

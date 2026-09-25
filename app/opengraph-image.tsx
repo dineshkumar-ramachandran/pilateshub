@@ -14,24 +14,24 @@ export default function OgImage() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          background: "#201d18",
-          color: "#f4efe6",
+          background: "#fdfbf7",
+          color: "#1f1a12",
           padding: "72px",
           fontFamily: "Georgia, serif",
         }}
       >
-        <div style={{ display: "flex", fontSize: 30, letterSpacing: 6, color: "#b26a49" }}>
+        <div style={{ display: "flex", fontSize: 30, letterSpacing: 6, color: "#a9832a" }}>
           PILATES STUDIO · BENGALURU
         </div>
         <div style={{ display: "flex", flexDirection: "column" }}>
           <div style={{ fontSize: 130, lineHeight: 1, fontStyle: "italic" }}>Move with</div>
-          <div style={{ fontSize: 130, lineHeight: 1, color: "#b26a49", fontStyle: "italic" }}>
+          <div style={{ fontSize: 130, lineHeight: 1, color: "#a9832a", fontStyle: "italic" }}>
             intention.
           </div>
         </div>
         <div style={{ display: "flex", justifyContent: "space-between", fontSize: 28 }}>
           <span>PilatesHub</span>
-          <span style={{ color: "#7d8a6e" }}>pilateshub.in</span>
+          <span style={{ color: "#7d7159" }}>pilateshub.in</span>
         </div>
       </div>
     ),

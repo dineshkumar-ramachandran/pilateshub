@@ -1,8 +1,8 @@
 /**
  * PilatesHub — Single source of truth for copy + imagery.
  *
- * IMAGE STRATEGY: All photography is referenced here by Unsplash photo ID and
- * resolved through `img()`. To swap in real studio/founder/session photography
+ * IMAGE STRATEGY: Real studio photography lives in /public/studio (client shoot,
+ * Sept 2026) and /public/sessions, /public/locations. Paths pass through `img()`. To swap in real studio/founder/session photography
  * later, replace the `id` values (or point `img()` at your own CDN) in ONE place.
  *
  * FACTS: Everything below marked "real" is taken from pilateshub.in. Anything
@@ -10,8 +10,9 @@
  * client before launch — do not present placeholders as fact.
  */
 
-/** Build a sized, optimized Unsplash URL from a photo ID. */
+/** Local studio photos ("/studio/...") pass straight through; anything else is an Unsplash ID. */
 export function img(id: string, w = 1600, q = 72): string {
+  if (id.startsWith("/")) return id;
   return `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=${w}&q=${q}`;
 }
 
@@ -64,13 +65,13 @@ export const hero = {
   // through the workout as you read. All chosen for BRIGHT frames so the copy
   // stays legible without a heavy dark overlay.
   sequence: [
-    "1518611012118-696072aa579a", // stretch reach
-    "1571019613454-1cb2f99b2d8b", // plank / core
-    "1552196563-55cd4e45efb3",    // seated fold / roll up
-    "1506126613408-eca07ce68773", // side plank / teaser
+    "/studio/hero-1.webp", // group on ladder barrels
+    "/studio/hero-2.webp", // reformer class
+    "/studio/hero-3.webp", // cadillac duet
+    "/studio/hero-4.webp", // cadillac lunge
   ],
   // Legacy single image (kept for anywhere else that may still reference it).
-  image: "1518611012118-696072aa579a",
+  image: "/studio/hero-1.webp",
 } as const;
 
 /* --------------------------- Brand statement ------------------------------ */
@@ -90,7 +91,7 @@ export const philosophy = {
     "At PilatesHub, movement is deliberate. Every session is built around alignment, breath and control — the principles Joseph Pilates called Contrology.",
     "Founded in HSR Layout by Bhagya & Manju, with over a decade of experience, the studio was created as a welcoming space for high-quality, personal Pilates training.",
   ],
-  image: "1544367567-0f2fcb009e0b", // reformer/studio (verify/swap)
+  image: "/studio/philosophy.webp",
 } as const;
 
 /* ------------------------------- Poses ------------------------------------ */
@@ -111,13 +112,13 @@ export const poses = {
 // Distilled from the studio's own acrostic on pilateshub.in.
 
 export const benefits = [
-  { n: "01", title: "Posture", copy: "Perfect your posture and stand taller with a body in balance.", image: "1591258370814-01609b341790" },
-  { n: "02", title: "Core", copy: "Ignite deep core strength that supports every movement you make.", image: "1518310383802-640c2de311b2" },
-  { n: "03", title: "Strength", copy: "Build lean, sculpted muscle through controlled resistance.", image: "1517836357463-d25dfeac3438" },
-  { n: "04", title: "Relief", copy: "Alleviate aches and pain by moving the way the body is designed to.", image: "1600881333168-2ef49b341f30" },
-  { n: "05", title: "Technique", copy: "Train with the right technique under certified, attentive guidance.", image: "1571019613454-1cb2f99b2d8b" },
-  { n: "06", title: "Performance", copy: "Enhance your daily life and sports performance with functional mobility.", image: "1518459031867-a89b944bffe4" },
-  { n: "07", title: "Confidence", copy: "Strengthen self-confidence through a body you understand and trust.", image: "1506126613408-eca07ce68773" },
+  { n: "01", title: "Posture", copy: "Perfect your posture and stand taller with a body in balance.", image: "/studio/posture.webp" },
+  { n: "02", title: "Core", copy: "Ignite deep core strength that supports every movement you make.", image: "/studio/core.webp" },
+  { n: "03", title: "Strength", copy: "Build lean, sculpted muscle through controlled resistance.", image: "/studio/strength.webp" },
+  { n: "04", title: "Relief", copy: "Alleviate aches and pain by moving the way the body is designed to.", image: "/studio/relief.webp" },
+  { n: "05", title: "Technique", copy: "Train with the right technique under certified, attentive guidance.", image: "/studio/technique.webp" },
+  { n: "06", title: "Performance", copy: "Enhance your daily life and sports performance with functional mobility.", image: "/studio/performance.webp" },
+  { n: "07", title: "Confidence", copy: "Strengthen self-confidence through a body you understand and trust.", image: "/studio/confidence.webp" },
 ] as const;
 
 /* -------------------------------- Sessions -------------------------------- */
@@ -133,7 +134,7 @@ export const sessions = [
       "3 days / week · 12 sessions per month · 45-day validity",
       "2 days / week · 8-session pack · 1-month validity",
     ],
-    image: "1571902943202-507ec2618e8f",
+    image: "/studio/group.webp",
     imageUrl: "/sessions/group.jpg",
   },
   {
@@ -145,7 +146,7 @@ export const sessions = [
       "3 days / week · 12 sessions per month · 45-day validity",
       "2 days / week · 8-session pack · 1-month validity",
     ],
-    image: "1518611012118-696072aa579a",
+    image: "/studio/personal.webp",
     imageUrl: "/sessions/personal.jpg",
   },
   {
@@ -154,7 +155,7 @@ export const sessions = [
     tag: "Personal · Physio-led",
     copy: "Rehabilitation-focused Pilates for recovery from injury or chronic movement issues, delivered as personal classes with careful, physio-led progression.",
     plans: ["Personal classes only · tailored to your assessment"],
-    image: "1599901860904-17e6ed7083a0",
+    image: "/studio/clinical.webp",
     imageUrl: "/sessions/clinical.jpg",
   },
   {
@@ -163,7 +164,7 @@ export const sessions = [
     tag: "Personal · Specialised",
     copy: "Safe, adapted Pilates through pregnancy and after — strength, posture and controlled movement, respecting each stage. Delivered as personal classes.",
     plans: ["Personal classes only · tailored to each trimester and stage"],
-    image: "1552196563-55cd4e45efb3",
+    image: "/studio/prenatal.webp",
     imageUrl: "/sessions/prenatal-postnatal.jpg",
   },
 ] as const;
@@ -261,7 +262,7 @@ export const locations = [
     mapsQuery:
       "PilatesHub, 2577, 13th Cross, 27th Main Rd, HSR Layout, Bengaluru 560102",
     geo: { lat: 12.9121, lng: 77.6446 },
-    image: "1540206395-68808572332f",
+    image: "/locations/hsr-home.jpg",
   },
   {
     slug: "bellandur",
@@ -283,7 +284,7 @@ export const locations = [
     mapsQuery:
       "PilatesHub, Bhupal Reddy Building, Gear School Rd, Bellandur, Bengaluru 560103",
     geo: null,
-    image: "1518459031867-a89b944bffe4",
+    image: "/locations/bellandur-home.jpg",
   },
   {
     slug: "koramangala",
@@ -305,7 +306,7 @@ export const locations = [
     mapsQuery:
       "PilatesHub, SR Complex, Tavarekere Main Rd, S.G. Palya, Bengaluru 560029",
     geo: null,
-    image: "1571902943202-507ec2618e8f",
+    image: "/locations/koramangala-home.jpg",
   },
 ] as const;
 
@@ -444,7 +445,7 @@ export const founders = {
     "It started with a single studio in HSR Layout, Bengaluru, and has since expanded across the city to Bellandur and Koramangala. The practice now extends further through Pilates equipment sales and teacher training.",
     "More than a thousand clients have trained with us since we opened — a community built one careful session at a time.",
   ],
-  image: "1594381898411-846e7d193883",
+  image: "/studio/founders.webp",
 } as const;
 
 /* ----------------------------- Movement progression ----------------------- */
@@ -489,14 +490,14 @@ export const community = {
   hashtag: "#PilatesHubChallenge",
   blurb: "Share your 30-day practice and join the community.",
   images: [
-    "1517130038641-a774d04afb3c",
-    "1506126613408-eca07ce68773",
-    "1518611012118-696072aa579a",
-    "1571902943202-507ec2618e8f",
-    "1599901860904-17e6ed7083a0",
-    "1540206395-68808572332f",
-    "1518459031867-a89b944bffe4",
-    "1591258370814-01609b341790",
+    "/studio/hero-1.webp",
+    "/studio/hero-2.webp",
+    "/studio/hero-3.webp",
+    "/studio/hero-4.webp",
+    "/studio/relief.webp",
+    "/studio/technique.webp",
+    "/studio/performance.webp",
+    "/studio/confidence.webp",
   ],
 } as const;
 
@@ -505,5 +506,5 @@ export const community = {
 export const finalCta = {
   lines: ["Move better.", "Feel stronger.", "Live with vitality."],
   sub: "Begin your Pilates journey at HSR Layout, Bellandur or Koramangala.",
-  image: "1517836357463-d25dfeac3438",
+  image: "/studio/final.webp",
 } as const;

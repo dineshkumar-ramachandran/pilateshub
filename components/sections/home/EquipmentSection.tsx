@@ -32,7 +32,7 @@ export default function EquipmentSection() {
                   rel="noopener noreferrer"
                   className="block"
                 >
-                  <div className="relative aspect-[4/5] overflow-hidden rounded-[var(--radius-lg)] bg-cream">
+                  <div className="relative aspect-[4/5] overflow-hidden rounded-[var(--radius-lg)] bg-white ring-1 ring-inset ring-line">
                     <Image
                       src={e.imageUrl}
                       alt={e.name}
