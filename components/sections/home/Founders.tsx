@@ -83,12 +83,14 @@ export default function Founders() {
               </div>
             </FadeIn>
 
-            {/* Signature-style caption card floating over the portrait */}
+            {/* Signature-style caption card: sits below the portrait on mobile
+             *  so it never covers the founders' legs, floats over the bottom-
+             *  left corner from md up. */}
             <FadeIn
               delay={0.5}
               duration={0.8}
               y={20}
-              className="absolute -bottom-6 -left-6 max-w-[240px] rounded-[var(--radius-md)] border border-cream/10 bg-noir/90 p-5 backdrop-blur-md"
+              className="mt-5 max-w-[240px] rounded-[var(--radius-md)] border border-cream/10 bg-noir/90 p-5 backdrop-blur-md md:absolute md:-bottom-6 md:-left-6 md:mt-0"
             >
               <p className="font-mono text-[0.65rem] uppercase tracking-[0.24em] text-gold">
                 Founders
